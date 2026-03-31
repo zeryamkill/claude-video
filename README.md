@@ -1,3 +1,5 @@
+![Claude Video](screenshots/cover.gif)
+
 # Claude Video: AI Video Production Suite for Claude Code
 
 AI-powered video production suite for [Claude Code](https://claude.ai/claude-code). Edit, transcode, caption, analyze, generate, and create promo videos: all from your terminal.
