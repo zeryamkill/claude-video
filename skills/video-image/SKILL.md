@@ -15,7 +15,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-image — AI Image Generation for Video
+# claude-video-image: AI Image Generation for Video
 
 ## Pre-Flight
 
@@ -23,9 +23,9 @@ allowed-tools:
 2. Check free VRAM: `nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits`
 3. Route to local or API based on VRAM availability and user preference
 
-## API Generation (Gemini 3 Pro Image) — Primary
+## API Generation (Gemini 3 Pro Image): Primary
 
-Gemini 3 Pro Image (Nano Banana Pro) — best quality API generation, up to 4K resolution.
+Gemini 3 Pro Image (Nano Banana Pro): best quality API generation, up to 4K resolution.
 Uses Google Search for factual accuracy. Best for photorealistic content and complex prompts.
 
 ```bash
@@ -38,15 +38,15 @@ python3 scripts/image_generate.py \
 ```
 
 **Options:**
-- `--api gemini` — Use Gemini 3 Pro Image API (default API)
-- `--resolution 1K` — Standard resolution ($0.13/image)
-- `--resolution 2K` — High resolution ($0.13/image, default)
-- `--resolution 4K` — Ultra resolution ($0.24/image)
-- `--aspect RATIO` — Aspect ratio: 1:1, 16:9, 9:16, 4:3, 3:4, 4:5, 5:4, 21:9
+- `--api gemini`: Use Gemini 3 Pro Image API (default API)
+- `--resolution 1K`: Standard resolution ($0.13/image)
+- `--resolution 2K`: High resolution ($0.13/image, default)
+- `--resolution 4K`: Ultra resolution ($0.24/image)
+- `--aspect RATIO`: Aspect ratio: 1:1, 16:9, 9:16, 4:3, 3:4, 4:5, 5:4, 21:9
 
 Requires `GOOGLE_API_KEY` environment variable.
 
-## Local Generation (FLUX.2 klein 4B) — Free, Fastest
+## Local Generation (FLUX.2 klein 4B): Free, Fastest
 
 Best local option, free, sub-second generation. Requires 13GB VRAM (or 6GB with quantization).
 
@@ -59,12 +59,12 @@ python3 scripts/image_generate.py \
 ```
 
 **Options:**
-- `--model flux` — FLUX.2 klein 4B (default local, 13GB VRAM, <1 second)
-- `--model sd35medium` — Stable Diffusion 3.5 Medium (6GB VRAM, ~5-20 seconds)
-- `--quantize int8` — Quantize FLUX to ~8GB VRAM (slight quality loss)
-- `--steps N` — Inference steps (default: 4 for FLUX, 28 for SD)
-- `--seed N` — Reproducible generation
-- `--batch N` — Generate N variants (default: 1)
+- `--model flux`: FLUX.2 klein 4B (default local, 13GB VRAM, <1 second)
+- `--model sd35medium`: Stable Diffusion 3.5 Medium (6GB VRAM, ~5-20 seconds)
+- `--quantize int8`: Quantize FLUX to ~8GB VRAM (slight quality loss)
+- `--steps N`: Inference steps (default: 4 for FLUX, 28 for SD)
+- `--seed N`: Reproducible generation
+- `--batch N`: Generate N variants (default: 1)
 
 **When to use each:**
 - Gemini 3 Pro Image: Best quality, complex prompts, factual content, up to 4K ($0.13-0.24)
@@ -72,7 +72,7 @@ python3 scripts/image_generate.py \
 - SD 3.5 Medium: <13GB VRAM free, or need different aesthetic
 - OpenAI GPT Image 1: Need transparent PNG backgrounds
 
-## API Generation (OpenAI GPT Image 1) — For Transparent PNGs
+## API Generation (OpenAI GPT Image 1): For Transparent PNGs
 
 Only option that natively generates transparent PNG backgrounds.
 
@@ -87,12 +87,12 @@ python3 scripts/image_generate.py \
 ```
 
 **Options:**
-- `--api openai` — Use OpenAI GPT Image 1 API
-- `--quality mini` — GPT Image 1 Mini ($0.005/image, default)
-- `--quality medium` — GPT Image 1.5 ($0.034/image)
-- `--quality high` — GPT Image 1.5 high ($0.20/image)
-- `--transparent` — Transparent background (PNG only)
-- `--size WxH` — Output size: 1024x1024, 1536x1024, 1024x1536
+- `--api openai`: Use OpenAI GPT Image 1 API
+- `--quality mini`: GPT Image 1 Mini ($0.005/image, default)
+- `--quality medium`: GPT Image 1.5 ($0.034/image)
+- `--quality high`: GPT Image 1.5 high ($0.20/image)
+- `--transparent`: Transparent background (PNG only)
+- `--size WxH`: Output size: 1024x1024, 1536x1024, 1024x1536
 
 Requires `OPENAI_API_KEY` environment variable.
 
@@ -146,9 +146,9 @@ Generated images can be used as:
 
 ## VRAM Management
 
-- FLUX.2 klein requires 13GB — unload all other GPU models first
-- SD 3.5 Medium requires 6GB — can coexist with light models (<5GB)
-- rembg requires ~2GB — safe to run alongside medium models
+- FLUX.2 klein requires 13GB: unload all other GPU models first
+- SD 3.5 Medium requires 6GB: can coexist with light models (<5GB)
+- rembg requires ~2GB: safe to run alongside medium models
 - Script handles loading/unloading automatically via `torch.cuda.empty_cache()`
 
 ## Safety Rules

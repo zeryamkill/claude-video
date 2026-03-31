@@ -11,7 +11,7 @@ allowed-tools:
   - Read
 ---
 
-# claude-video-analyze — Video Analysis and Quality Assessment
+# claude-video-analyze: Video Analysis and Quality Assessment
 
 All analysis operations are **read-only** and safe to auto-execute without confirmation.
 

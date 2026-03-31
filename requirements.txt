@@ -1,0 +1,29 @@
+# Claude Video: Python Dependencies
+# Last updated: 2026-03-31
+#
+# Core scripts use stdlib only (no external deps required).
+# The following are optional, needed only for specific sub-skills.
+
+# AI Enhancement (upscale, face restore, frame interpolation)
+# torch>=2.0.0            # PyTorch (install separately for CUDA support)
+# torchvision>=0.15.0
+# realesrgan>=0.3.0       # Real-ESRGAN upscaling
+# codeformer-pip>=0.0.1   # Face restoration
+# rife-ncnn-vulkan>=1.0   # Frame interpolation
+
+# Captioning (speech-to-text)
+# faster-whisper>=1.0.0   # WhisperX transcription
+# whisperx>=3.1.0         # Word-level timestamps
+
+# AI Audio Enhancement
+# demucs>=4.0.0           # Source separation
+# deepfilternet>=0.5.0    # AI noise reduction
+
+# Video Generation (Veo, FLUX.2)
+# google-genai>=1.67.0    # Google Gemini/Veo API
+
+# Web Screenshots
+# playwright>=1.40.0      # Browser automation
+
+# Scene Detection
+# scenedetect>=0.6.0      # PySceneDetect

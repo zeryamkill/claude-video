@@ -15,7 +15,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-enhance — AI Video Enhancement
+# claude-video-enhance: AI Video Enhancement
 
 ## Pre-Flight
 
@@ -37,12 +37,12 @@ python3 scripts/video_enhance.py upscale "$INPUT" \
 ```
 
 **Options:**
-- `--scale 2|4` — Upscale factor (default: 4)
-- `--model realesrgan-x4plus` — General purpose model (default)
-- `--model realesrgan-x4plus-anime` — Optimized for anime/cartoon content
-- `--half` — Use FP16 precision (faster, less VRAM, recommended)
-- `--output FILE` — Output path
-- `--codec h264|hevc|av1` — Output codec (default: h264_nvenc if available)
+- `--scale 2|4`: Upscale factor (default: 4)
+- `--model realesrgan-x4plus`: General purpose model (default)
+- `--model realesrgan-x4plus-anime`: Optimized for anime/cartoon content
+- `--half`: Use FP16 precision (faster, less VRAM, recommended)
+- `--output FILE`: Output path
+- `--codec h264|hevc|av1`: Output codec (default: h264_nvenc if available)
 
 **VRAM:** 2-6GB with `--half` flag
 
@@ -71,12 +71,12 @@ python3 scripts/video_enhance.py interpolate "$INPUT" \
 ```
 
 **Options:**
-- `--multi 2|4|8` — Frame multiplication factor (default: 2)
+- `--multi 2|4|8`: Frame multiplication factor (default: 2)
   - 2x: 30fps → 60fps, or half-speed smooth slow motion
   - 4x: 30fps → 120fps, or quarter-speed smooth slow motion
   - 8x: 30fps → 240fps, extreme slow motion
-- `--output FILE` — Output path
-- `--fps-target N` — Instead of multiplier, set target FPS
+- `--output FILE`: Output path
+- `--fps-target N`: Instead of multiplier, set target FPS
 
 **VRAM:** 2-4GB
 
@@ -99,13 +99,13 @@ python3 scripts/video_enhance.py restore-faces "$INPUT" \
 ```
 
 **Options:**
-- `--fidelity 0.0-1.0` — Quality-fidelity balance (default: 0.7)
+- `--fidelity 0.0-1.0`: Quality-fidelity balance (default: 0.7)
   - 0.0 = Most beautiful (more hallucinated/enhanced)
   - 0.5 = Balanced
   - 0.7 = Recommended (good quality while staying faithful)
   - 1.0 = Most faithful to original (minimal enhancement)
-- `--bg-upscale` — Also upscale background with Real-ESRGAN
-- `--output FILE` — Output path
+- `--bg-upscale`: Also upscale background with Real-ESRGAN
+- `--output FILE`: Output path
 
 **VRAM:** 2-4GB (CodeFormer) + 2-4GB if `--bg-upscale` enabled
 
@@ -130,12 +130,12 @@ python3 scripts/video_enhance.py remove-bg "$INPUT" \
 ```
 
 **Options:**
-- `--format webm` — VP9 with alpha channel (for web, default)
-- `--format prores` — ProRes 4444 with alpha (for editing workflows)
-- `--model u2net_human_seg` — Optimized for humans (default)
-- `--model u2net` — General purpose (any subject)
-- `--model isnet-general-use` — Alternative general model
-- `--output FILE` — Output path
+- `--format webm`: VP9 with alpha channel (for web, default)
+- `--format prores`: ProRes 4444 with alpha (for editing workflows)
+- `--model u2net_human_seg`: Optimized for humans (default)
+- `--model u2net`: General purpose (any subject)
+- `--model isnet-general-use`: Alternative general model
+- `--output FILE`: Output path
 
 **VRAM:** 1-2GB (GPU) or CPU fallback
 
@@ -188,7 +188,7 @@ All operations load models on-demand and unload after processing. Multiple light
 
 ## Safety Rules
 
-1. **Always estimate time and disk space** before starting — confirm with user
+1. **Always estimate time and disk space** before starting: confirm with user
 2. Run `bash scripts/preflight.sh "$INPUT" "$OUTPUT"` before writes
 3. Never overwrite source video
 4. For upscaling: verify sufficient disk space for temp frames (can be 100x+ input size)

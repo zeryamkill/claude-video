@@ -5,9 +5,9 @@
 The validated composition approach for screen recordings:
 
 ### Layout Dimensions (1080x1920)
-- **Top zone**: 200px — hook text (white 52pt + cyan 32pt, first 3.5s)
-- **Content**: 1372px — cropped + scaled screen content
-- **Bottom zone**: 348px — karaoke captions centered (MarginV=240)
+- **Top zone**: 200px: hook text (white 52pt + cyan 32pt, first 3.5s)
+- **Content**: 1372px: cropped + scaled screen content
+- **Bottom zone**: 348px: karaoke captions centered (MarginV=240)
 
 ### Crop Calculation
 ```
@@ -27,7 +27,7 @@ Style: Default,Impact,72,&H00FFFFFF,&H0000FFFF,&H00000000,&HC0000000,
        -1,0,0,0,100,100,2,0,4,4,0,2,40,40,240,1
 ```
 - BorderStyle=4 (opaque box), BackColour=&HC0000000 (semi-transparent black)
-- Karaoke: `{\kf<cs>}word` — word-by-word yellow sweep fill
+- Karaoke: `{\kf<cs>}word`: word-by-word yellow sweep fill
 - 3 words per line, centered in bottom padding zone
 
 ### VLM Crop Position Guide
@@ -119,11 +119,11 @@ Higher energy = more animated speech, louder moments, audience reactions.
 ### Keyword Density (Weight: 0.20)
 
 Engagement keywords by category:
-- **Questions**: why, how, what, when, where — indicate curiosity hooks
-- **Superlatives**: best, worst, most, biggest — indicate strong claims
-- **Emotional**: amazing, shocking, insane, hilarious — indicate emotional content
-- **Urgency**: never, always, must, secret, hack — indicate actionable content
-- **Numbers**: first, percent, million — indicate data/specifics
+- **Questions**: why, how, what, when, where: indicate curiosity hooks
+- **Superlatives**: best, worst, most, biggest: indicate strong claims
+- **Emotional**: amazing, shocking, insane, hilarious: indicate emotional content
+- **Urgency**: never, always, must, secret, hack: indicate actionable content
+- **Numbers**: first, percent, million: indicate data/specifics
 
 Score = (keyword_hits / total_words) / 0.10, capped at 1.0
 

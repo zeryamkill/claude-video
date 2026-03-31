@@ -11,7 +11,7 @@ allowed-tools:
   - Read
 ---
 
-# claude-video-download — Video Downloading via yt-dlp
+# claude-video-download: Video Downloading via yt-dlp
 
 ## Pre-Flight
 

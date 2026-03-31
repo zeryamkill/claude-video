@@ -14,7 +14,7 @@ allowed-tools:
   - Edit
 ---
 
-# claude-video-create — Programmatic Video via Remotion
+# claude-video-create: Programmatic Video via Remotion
 
 ## Pre-Flight
 
@@ -47,10 +47,10 @@ npm install
 ```
 
 This creates a standard Remotion project with:
-- `src/Root.tsx` — Composition registry
-- `src/` — Component directory
-- `remotion.config.ts` — Rendering configuration
-- `package.json` — Dependencies
+- `src/Root.tsx`: Composition registry
+- `src/`: Component directory
+- `remotion.config.ts`: Rendering configuration
+- `package.json`: Dependencies
 
 ## Core Concepts
 

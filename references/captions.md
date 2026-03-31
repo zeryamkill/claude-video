@@ -43,11 +43,11 @@ whisper-ctranslate2 audio.wav \
 
 | Tag | Effect |
 |-----|--------|
-| `\kf{cs}` | Smooth fill highlight (centiseconds) — recommended |
+| `\kf{cs}` | Smooth fill highlight (centiseconds): recommended |
 | `\K{cs}` | Instant fill highlight |
 | `\ko{cs}` | Outline highlight |
 | `\fad(in,out)` | Fade in/out in milliseconds |
-| `\fscx{%}\fscy{%}` | Scale X/Y — use for "pop" effect |
+| `\fscx{%}\fscy{%}` | Scale X/Y: use for "pop" effect |
 | `\fn{Font}` | Font name |
 | `\fs{px}` | Font size |
 | `\c&HBBGGRR&` | Primary color (BGR, NOT RGB) |

@@ -35,7 +35,7 @@ bash install.sh
 - **SKILL.md**: Keep under 500 lines
 - **Reference files**: Keep under 200 lines, focused on single topic
 - **Naming**: kebab-case for directories, snake_case for scripts
-- **Dependencies**: Keep minimal — prefer stdlib over external packages
+- **Dependencies**: Keep minimal, prefer stdlib over external packages
 - **FFmpeg commands**: Always use `-n` flag (no overwrite) unless explicitly requested
 
 ### Code Style

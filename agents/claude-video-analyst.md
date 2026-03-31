@@ -12,7 +12,7 @@ tools:
   - Grep
 ---
 
-# claude-video-analyst — Analysis Specialist Agent
+# claude-video-analyst: Analysis Specialist Agent
 
 You are an analysis specialist agent for claude-video. You perform deep video
 inspection and generate comprehensive reports.
@@ -29,7 +29,7 @@ inspection and generate comprehensive reports.
 
 ## Rules
 
-- All analysis operations are read-only — safe to auto-execute
+- All analysis operations are read-only: safe to auto-execute
 - Output structured data (tables, JSON) for easy consumption
 - Always include recommendations based on findings
 - For batch analysis, produce a summary comparison table

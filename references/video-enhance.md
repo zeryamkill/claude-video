@@ -1,6 +1,6 @@
 # Video Enhancement Reference
 
-## Real-ESRGAN — AI Upscaling
+## Real-ESRGAN: AI Upscaling
 
 ### Models
 | Model | Scale | Best For | VRAM (FP16) |
@@ -48,7 +48,7 @@ Intermediate PNG frames require significant storage:
 - 10min 30fps video = 18,000 frames
 - 4K temp space: 180-360GB
 
-## Practical-RIFE — Frame Interpolation
+## Practical-RIFE: Frame Interpolation
 
 ### Installation
 ```bash
@@ -79,7 +79,7 @@ python3 inference_video.py --multi=4 --video=input.mp4
 - Create cinematic slow motion from normal footage
 - Smooth choppy screen recordings
 
-## CodeFormer — Face Restoration
+## CodeFormer: Face Restoration
 
 ### Installation
 ```bash
@@ -117,7 +117,7 @@ python3 inference_gfpgan.py -i frames/ -o restored/ -v 1.3 --bg_upsampler reales
 ```
 Simpler but less control than CodeFormer. Use when CodeFormer is unavailable.
 
-## rembg — Background Removal for Video
+## rembg: Background Removal for Video
 
 ### Single Frame
 ```bash
@@ -152,7 +152,7 @@ ffmpeg -framerate 30 -i transparent_frames/%08d.png \
 
 ### Performance: 5-10 FPS for 1080p with GPU
 
-## SAM 2.1 — Video Object Tracking
+## SAM 2.1: Video Object Tracking
 
 For isolating specific subjects (not just background removal):
 

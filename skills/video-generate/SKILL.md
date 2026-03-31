@@ -13,7 +13,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-generate — AI Video Generation
+# claude-video-generate: AI Video Generation
 
 > **Tip:** For advanced prompt engineering, Creative Director workflow, image-to-video with
 > prompt crafting, domain mode selection, and cost tracking, use the standalone `/veo` skill.
@@ -22,12 +22,12 @@ allowed-tools:
 ## Pre-Flight
 
 1. Check API keys:
-   - `GEMINI_API_KEY` — Required for Google Veo 3.1
-   - `RUNWAY_API_KEY` — Required for Runway Gen-4
+   - `GEMINI_API_KEY`: Required for Google Veo 3.1
+   - `RUNWAY_API_KEY`: Required for Runway Gen-4
 2. If no API keys available, only local SVD (very limited) is available
 3. Always show estimated cost and confirm before API generation
 
-## Google Veo 3.1 — Primary (Best Quality + Audio)
+## Google Veo 3.1: Primary (Best Quality + Audio)
 
 Generates up to 8-second clips with synchronized audio at up to 4K resolution.
 
@@ -41,13 +41,13 @@ python3 scripts/video_generate.py \
 ```
 
 **Options:**
-- `--provider veo` — Use Google Veo 3.1 Fast
-- `--prompt "..."` — Text description of desired video
-- `--image ref.png` — Image-to-video (animate a still frame)
-- `--aspect 16:9|9:16|1:1` — Aspect ratio
-- `--resolution 720p|1080p` — Output resolution
-- `--tier fast|standard` — Fast ($0.15/sec, 2-5 min gen) or Standard ($0.40/sec, 5-12 min gen)
-- `--output clip.mp4` — Output path
+- `--provider veo`: Use Google Veo 3.1 Fast
+- `--prompt "..."`: Text description of desired video
+- `--image ref.png`: Image-to-video (animate a still frame)
+- `--aspect 16:9|9:16|1:1`: Aspect ratio
+- `--resolution 720p|1080p`: Output resolution
+- `--tier fast|standard`: Fast ($0.15/sec, 2-5 min gen) or Standard ($0.40/sec, 5-12 min gen)
+- `--output clip.mp4`: Output path
 
 **Pricing:**
 - Veo 3.1 Fast: $0.15/sec x 8s = **$1.20 per clip**
@@ -61,7 +61,7 @@ python3 scripts/video_generate.py \
 
 **Generation time:** 2-5 minutes (Fast), 5-12 minutes (Standard). Script polls with progress.
 
-## Runway Gen-4 Turbo — Budget B-Roll
+## Runway Gen-4 Turbo: Budget B-Roll
 
 Fastest and cheapest for silent B-roll footage.
 
@@ -75,11 +75,11 @@ python3 scripts/video_generate.py \
 ```
 
 **Options:**
-- `--provider runway` — Use Runway Gen-4 Turbo
-- `--prompt "..."` — Text description
-- `--image ref.png` — Image-to-video
-- `--duration 5|10` — Clip duration in seconds (max 10)
-- `--output clip.mp4` — Output path
+- `--provider runway`: Use Runway Gen-4 Turbo
+- `--prompt "..."`: Text description
+- `--image ref.png`: Image-to-video
+- `--duration 5|10`: Clip duration in seconds (max 10)
+- `--output clip.mp4`: Output path
 
 **Pricing:** $0.05/sec x 10s = **$0.50 per clip**
 
@@ -90,7 +90,7 @@ python3 scripts/video_generate.py \
 
 **Best for:** Placeholder B-roll, transitions, background footage where audio isn't needed.
 
-## Local SVD-XT — Free but Limited
+## Local SVD-XT: Free but Limited
 
 Generates 2-4 second clips from a source image. No text-to-video.
 

@@ -11,7 +11,7 @@ allowed-tools:
   - Read
 ---
 
-# claude-video-transcode — Codec Conversion and Compression
+# claude-video-transcode: Codec Conversion and Compression
 
 ## Pre-Flight
 
@@ -94,7 +94,7 @@ ffmpeg -n -i input.mkv -c copy -movflags +faststart output.mp4
 # MP4 to MKV
 ffmpeg -n -i input.mp4 -c copy output.mkv
 
-# Any to WebM (requires VP9/AV1 video + Opus/Vorbis audio — may need re-encode)
+# Any to WebM (requires VP9/AV1 video + Opus/Vorbis audio: may need re-encode)
 ffmpeg -n -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -row-mt 1 \
   -c:a libopus -b:a 128k output.webm
 ```
@@ -147,5 +147,5 @@ NVENC supports up to **8 concurrent encoding sessions** on consumer GPUs.
 - **Always use `-pix_fmt yuv420p`** for maximum compatibility (unless 10-bit needed)
 - **Always add `-movflags +faststart`** for MP4 output (moves metadata to beginning for streaming)
 - **Use `-tag:v hvc1`** for H.265 in MP4 (required for Apple device playback)
-- **Stream copy** (`-c copy`) when only changing container — instant, lossless
-- **CRF mode** is almost always better than target bitrate — let the encoder decide
+- **Stream copy** (`-c copy`) when only changing container: instant, lossless
+- **CRF mode** is almost always better than target bitrate: let the encoder decide

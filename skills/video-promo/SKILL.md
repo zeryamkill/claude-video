@@ -15,10 +15,10 @@ allowed-tools:
   - Grep
 ---
 
-# claude-video-promo — Stock Footage + Remotion Promo Videos
+# claude-video-promo: Stock Footage + Remotion Promo Videos
 
 Create polished promo/marketing videos by combining **free stock footage** with
-Remotion text overlays, transitions, and audio — with **contrast-aware text placement**.
+Remotion text overlays, transitions, and audio: with **contrast-aware text placement**.
 
 ## Prerequisites
 
@@ -178,11 +178,11 @@ audio:
 
 ## Safety Rules
 
-1. **Never overwrite source files** — all operations produce new files
-2. **Check API key before searching** — fail clearly if PIXABAY_API_KEY is missing
+1. **Never overwrite source files**: all operations produce new files
+2. **Check API key before searching**: fail clearly if PIXABAY_API_KEY is missing
 3. **Validate stock video duration >= scene duration** before rendering
 4. **Pre-trim music** to match total video duration (Remotion Audio doesn't loop)
-5. **Confirm before batch downloads** — stock video files can be large
+5. **Confirm before batch downloads**: stock video files can be large
 
 ## Text Position Reference
 
@@ -205,15 +205,15 @@ audio:
 
 ## Scripts
 
-- `scripts/stock_search.py` — Search Pixabay + Pexels video/music APIs (stdlib only)
-- `scripts/stock_download.py` — Download + FFmpeg preprocess to 1080p 30fps
-- `scripts/analyze_contrast.py` — Frame luminance analysis → JSON contrast map
+- `scripts/stock_search.py`: Search Pixabay + Pexels video/music APIs (stdlib only)
+- `scripts/stock_download.py`: Download + FFmpeg preprocess to 1080p 30fps
+- `scripts/analyze_contrast.py`: Frame luminance analysis → JSON contrast map
 
 ## Remotion Components
 
-- `src/components/PromoVideo.tsx` — Main composition: sequences scenes + audio
-- `src/components/StockScene.tsx` — Single scene: OffthreadVideo bg + adaptive text + Ken Burns
-- `src/components/AdaptiveText.tsx` — Contrast-aware text with spring/fade/typewriter/slide-up animations
-- `src/components/Transitions.tsx` — Fade, wipe, zoom transitions between scenes
-- `src/components/AudioLayer.tsx` — Background music with voiceover ducking
-- `src/hooks/useContrast.ts` — Reads contrast map, returns per-frame adaptive text styles
+- `src/components/PromoVideo.tsx`: Main composition: sequences scenes + audio
+- `src/components/StockScene.tsx`: Single scene: OffthreadVideo bg + adaptive text + Ken Burns
+- `src/components/AdaptiveText.tsx`: Contrast-aware text with spring/fade/typewriter/slide-up animations
+- `src/components/Transitions.tsx`: Fade, wipe, zoom transitions between scenes
+- `src/components/AudioLayer.tsx`: Background music with voiceover ducking
+- `src/hooks/useContrast.ts`: Reads contrast map, returns per-frame adaptive text styles
