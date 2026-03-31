@@ -1,0 +1,55 @@
+# Generated output
+out/
+output/
+*.tmp
+*.bak
+
+# Downloaded media (user-specific)
+promo-pipeline/public/stock/*.mp4
+promo-pipeline/public/stock/*-contrast.json
+promo-pipeline/public/music/*.wav
+promo-pipeline/public/music/*.mp3
+promo-pipeline/public/voiceover/*.wav
+promo-pipeline/public/sfx/*.wav
+promo-pipeline/out/
+
+# Remotion build
+promo-pipeline/node_modules/
+
+# Generated props (user-specific)
+promo-pipeline/*-props.json
+promo-pipeline/test-props.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+venv/
+.venv/
+
+# Credentials (NEVER commit)
+.env
+.env.*
+*.env
+client_secret*.json
+service_account*.json
+oauth-token.json
+
+# Logs
+*.log
+
+# Archives
+*.zip
+*.tar.gz

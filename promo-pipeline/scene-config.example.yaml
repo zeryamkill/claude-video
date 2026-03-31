@@ -1,0 +1,54 @@
+# Promo Pipeline — Scene Configuration Example
+# Describe your video scenes here, then run the pipeline to produce a finished MP4.
+#
+# Usage (conversational): Just describe what you want to Claude and it builds this for you.
+# Usage (YAML):           /video promo --config scene-config.yaml
+
+scenes:
+  - id: hook
+    duration: 5s
+    stock:
+      query: "aerial city night lights cinematic"
+      source: pixabay             # pixabay or pexels
+      orientation: landscape      # landscape, portrait, or all
+      min_duration: 8s            # download longer than scene for Ken Burns
+    text:
+      headline: "The Future is Here"
+      subtext: "Launching Spring 2026"
+      position: center            # center, lower-third, upper-left, upper-right
+    transition: fade              # fade, wipe-left, wipe-right, zoom, cut
+    voiceover: "The future of marketing is about to change."
+
+  - id: features
+    duration: 8s
+    stock:
+      query: "technology dashboard data analytics"
+      source: pexels
+    text:
+      headline: "AI-Powered Analytics"
+      subtext: "Real-time insights at your fingertips"
+      position: lower-third
+    transition: wipe-left
+
+  - id: cta
+    duration: 4s
+    stock:
+      query: "success celebration team high five"
+      source: pixabay
+    text:
+      headline: "Get Started Today"
+      subtext: "www.example.com"
+      position: center
+    transition: fade
+
+# Background music (optional)
+audio:
+  music:
+    query: "upbeat corporate inspiring"    # Pixabay music search
+    volume: 0.3                            # 0-1 base volume
+    fade_in: 2s                            # fade in duration
+    fade_out: 3s                           # fade out duration
+    ducking: 0.15                          # volume during voiceover
+
+  voiceover:
+    voice: "Kore"                          # Gemini TTS voice name
