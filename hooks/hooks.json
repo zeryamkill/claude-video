@@ -1,3 +1,28 @@
 {
-  "hooks": {}
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/skills/claude-video/hooks/validate-skillmd.py \"$FILE_PATH\"",
+            "exitCodes": { "2": "block" }
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/skills/claude-video/hooks/preflight-check.sh \"$COMMAND\"",
+            "exitCodes": { "2": "block" }
+          }
+        ]
+      }
+    ]
+  }
 }

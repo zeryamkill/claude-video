@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-04-01
+
+### Added
+- V2 Intelligence Layer: scene planner with automatic aesthetic decisions
+- Scene intent classification (hook, problem, feature, proof, cta)
+- Contextual transition decision tree (dark-to-bright, hook-to-problem, etc.)
+- Per-scene audio ducking with configurable ramp speeds
+- Ken Burns direction variation (zoom out reveal, zoom in focus, slow pan)
+- Worst-case zone contrast analysis (not average) with variance detection
+- `scene_planner.py` script for automatic scene config enhancement
+- `promo-quality-checklist.md` reference for pre-export validation
+- `cut-impact` transition type (hard cut with white flash)
+- `marketplace.json` for plugin distribution
+- Validation hooks for SKILL.md frontmatter and FFmpeg safety
+- Remote installer with version pinning (`curl | bash` support)
+- Python venv creation and dependency installation in installer
+- Bounded dependency versioning in requirements.txt with CVE notes
+
+### Changed
+- `useContrast.ts`: uses worst-case zone brightness + variance for backing decisions
+- `StockScene.tsx`: accepts directional Ken Burns config prop
+- `AudioLayer.tsx`: per-scene ducking levels and ramp speeds (not global)
+- `Transitions.tsx`: per-transition duration + cut-impact type
+- `plugin.json`: added entry_point, skills[], agents[] component manifest
+- `install.sh`: supports both local and remote installation with version pinning
+
+### Fixed
+- Zoom transition abrupt midpoint: smooth blendFactor interpolation
+- Contrast analysis zone bounds validation prevents crashes on malformed data
+- CITATION.cff: removed empty ORCID field
+
 ## [1.0.0] - 2026-03-31
 
 ### Added

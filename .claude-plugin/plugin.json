@@ -1,6 +1,6 @@
 {
   "name": "claude-video",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI-powered video production suite for Claude Code. Editing, transcoding, captioning, analysis, AI generation (Veo), stock footage promos with contrast-aware text, shortform pipeline, audio enhancement, and more. GPU-accelerated with NVIDIA NVENC.",
   "author": {
     "name": "AgriciDaniel",
@@ -9,6 +9,30 @@
   "license": "MIT",
   "homepage": "https://github.com/AgriciDaniel/claude-video",
   "repository": "https://github.com/AgriciDaniel/claude-video",
+  "entry_point": "skills/video/SKILL.md",
+  "skills": [
+    "skills/video/SKILL.md",
+    "skills/video-edit/SKILL.md",
+    "skills/video-transcode/SKILL.md",
+    "skills/video-audio/SKILL.md",
+    "skills/video-caption/SKILL.md",
+    "skills/video-analyze/SKILL.md",
+    "skills/video-export/SKILL.md",
+    "skills/video-download/SKILL.md",
+    "skills/video-create/SKILL.md",
+    "skills/video-shorts/SKILL.md",
+    "skills/video-image/SKILL.md",
+    "skills/video-generate/SKILL.md",
+    "skills/video-screenshot/SKILL.md",
+    "skills/video-enhance/SKILL.md",
+    "skills/video-enhance-audio/SKILL.md",
+    "skills/video-promo/SKILL.md"
+  ],
+  "agents": [
+    "agents/claude-video-encoder.md",
+    "agents/claude-video-analyst.md",
+    "agents/claude-video-producer.md"
+  ],
   "keywords": [
     "video",
     "ffmpeg",

@@ -6,12 +6,11 @@ abstract: "AI-powered video production suite for Claude Code"
 authors:
   - family-names: Agrici
     given-names: Daniel
-    orcid: ""
 repository-code: "https://github.com/AgriciDaniel/claude-video"
 url: "https://github.com/AgriciDaniel/claude-video"
 license: MIT
-version: "1.0.0"
-date-released: "2026-03-31"
+version: "1.1.0"
+date-released: "2026-04-01"
 keywords:
   - video
   - ffmpeg

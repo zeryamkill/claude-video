@@ -1,0 +1,36 @@
+{
+  "catalog": {
+    "name": "Claude Video",
+    "tagline": "AI-powered video production suite for Claude Code",
+    "category": "media",
+    "tags": ["video", "ffmpeg", "ai", "remotion", "editing", "transcoding"],
+    "icon": "film",
+    "featured": false
+  },
+  "install": {
+    "type": "script",
+    "unix": "bash install.sh",
+    "windows": "powershell -ExecutionPolicy Bypass -File install.ps1"
+  },
+  "uninstall": {
+    "type": "script",
+    "unix": "bash uninstall.sh",
+    "windows": "powershell -ExecutionPolicy Bypass -File uninstall.ps1"
+  },
+  "prerequisites": {
+    "required": [
+      { "name": "FFmpeg", "check": "ffmpeg -version", "install": "sudo apt install ffmpeg" },
+      { "name": "Python 3.10+", "check": "python3 --version", "install": "https://python.org" }
+    ],
+    "optional": [
+      { "name": "Node.js 18+", "check": "node -v", "purpose": "Remotion promo pipeline" },
+      { "name": "NVIDIA GPU", "check": "nvidia-smi", "purpose": "NVENC hardware encoding + AI models" }
+    ]
+  },
+  "capabilities": {
+    "sub_skills": 15,
+    "agents": 3,
+    "scripts": 19,
+    "references": 15
+  }
+}
