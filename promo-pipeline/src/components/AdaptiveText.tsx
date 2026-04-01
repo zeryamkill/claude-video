@@ -1,8 +1,8 @@
 import React from "react";
 import { useCurrentFrame, spring, interpolate, useVideoConfig } from "remotion";
 import { FONT } from "../brand";
-import { getLuminanceAt, getAdaptiveStyle } from "../hooks/useContrast";
-import type { ContrastMap, TextPosition } from "../types";
+import { getLuminanceStats, getAdaptiveStyle } from "../hooks/useContrast";
+import type { ContrastMap, TextPosition, SceneIntent } from "../types";
 
 type AnimationType = "fade" | "spring" | "typewriter" | "slide-up";
 
@@ -13,9 +13,10 @@ interface AdaptiveTextProps {
   fontSize?: number;
   fontFamily?: string;
   fontWeight?: number;
-  delay?: number; // frames before animation starts
+  delay?: number;
   animation?: AnimationType;
-  sceneStartFrame?: number; // global frame where this scene starts
+  sceneStartFrame?: number;
+  intent?: SceneIntent;  // V2: scene intent for CTA styling
 }
 
 export const AdaptiveText: React.FC<AdaptiveTextProps> = ({
@@ -28,14 +29,19 @@ export const AdaptiveText: React.FC<AdaptiveTextProps> = ({
   delay = 0,
   animation = "fade",
   sceneStartFrame = 0,
+  intent,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const timeSec = (sceneStartFrame + frame) / fps;
 
-  // Get luminance at current time + position
-  const luminance = getLuminanceAt(contrastMap, timeSec, position);
-  const style = getAdaptiveStyle(luminance);
+  // V2: Use full luminance stats (avg + max + variance) for smarter backing
+  const stats = getLuminanceStats(contrastMap, timeSec, position);
+  const style = getAdaptiveStyle(stats.avg, stats.max, stats.variance);
+
+  // V2: CTA scenes get larger text and accent glow
+  const isCTA = intent === "cta";
+  const effectiveFontSize = isCTA ? Math.round(fontSize * 1.15) : fontSize;
 
   // Animation
   let opacity = 1;
@@ -88,7 +94,7 @@ export const AdaptiveText: React.FC<AdaptiveTextProps> = ({
   return (
     <div
       style={{
-        fontSize,
+        fontSize: effectiveFontSize,
         fontFamily,
         fontWeight,
         color: style.color,

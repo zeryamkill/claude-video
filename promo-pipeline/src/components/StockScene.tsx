@@ -10,7 +10,6 @@ import { FONT } from "../brand";
 import { AdaptiveText } from "./AdaptiveText";
 import type { SceneConfig } from "../types";
 
-// Position presets: CSS styles for text placement
 const POSITION_STYLES: Record<string, React.CSSProperties> = {
   center: {
     justifyContent: "center",
@@ -45,26 +44,24 @@ export const StockScene: React.FC<StockSceneProps> = ({
 }) => {
   const frame = useCurrentFrame();
 
-  // Ken Burns: subtle slow zoom over the scene duration
-  const kenBurns = interpolate(
+  // V2: Ken Burns with direction from scene planner
+  const kb = scene.kenBurns || { start: 1.0, end: 1.06, origin: "center center" };
+  const kenBurnsScale = interpolate(
     frame,
     [0, scene.durationFrames],
-    [1.0, 1.06],
+    [kb.start, kb.end],
     { extrapolateRight: "clamp" }
   );
 
   return (
     <AbsoluteFill>
-      {/* Video background with Ken Burns */}
+      {/* Video background with directional Ken Burns */}
       <AbsoluteFill
         style={{
-          transform: `scale(${kenBurns})`,
-          transformOrigin: "center center",
+          transform: `scale(${kenBurnsScale})`,
+          transformOrigin: kb.origin,
         }}
       >
-        {/* OffthreadVideo is more reliable than Video for stock footage —
-            renders frames off the main thread, handles codec quirks better.
-            Stock videos should be pre-trimmed to >= scene duration by stock_download.py */}
         <OffthreadVideo
           src={staticFile(scene.stockPath)}
           style={{
@@ -96,6 +93,7 @@ export const StockScene: React.FC<StockSceneProps> = ({
             delay={15}
             animation="spring"
             sceneStartFrame={globalStartFrame}
+            intent={scene.intent}
           />
         )}
         {scene.subtext && (
@@ -109,6 +107,7 @@ export const StockScene: React.FC<StockSceneProps> = ({
             delay={30}
             animation="slide-up"
             sceneStartFrame={globalStartFrame}
+            intent={scene.intent}
           />
         )}
       </AbsoluteFill>

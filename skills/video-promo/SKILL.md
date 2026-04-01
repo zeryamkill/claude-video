@@ -20,6 +20,38 @@ allowed-tools:
 Create polished promo/marketing videos by combining **free stock footage** with
 Remotion text overlays, transitions, and audio: with **contrast-aware text placement**.
 
+## V2 Intelligence Layer
+
+The pipeline includes a **scene planner** that automatically makes aesthetic decisions:
+
+### Scene Intent Classification
+The planner reads headlines/subtexts and classifies each scene:
+- **hook**: First scene, dramatic, dark (Ken Burns: zoom out reveal)
+- **problem**: Tension, urgency (Ken Burns: slow pan)
+- **feature**: Clean, professional (Ken Burns: zoom in focus)
+- **proof**: Warm, collaborative (static or medium)
+- **cta**: Last scene, urgent (Ken Burns: subtle zoom, 15% larger text)
+
+### Transition Decision Tree
+Transitions are auto-selected based on scene context:
+- Dark to bright: fade (0.7s, smooth brightness ramp)
+- Hook to problem: cut (punchy, immediate)
+- Feature to feature: wipe-left (progression feel)
+- Any to CTA: zoom (builds urgency)
+
+### Audio Intelligence
+Per-scene ducking levels and ramp speeds:
+- Hook: duck to 0.10, 10-frame ramp
+- Feature: duck to 0.10, 10-frame ramp
+- CTA: duck to 0.08, 5-frame ramp (fastest, voice most prominent)
+- Proof: duck to 0.15, 15-frame ramp (music more present)
+
+### Contrast Analysis V2
+Uses worst-case zone brightness (not average) plus variance detection:
+- High variance (busy background): always strong backing
+- Bright zone in text area (>0.5): force backing regardless of average
+- Clean dark background: no backing, just shadow
+
 ## Prerequisites
 
 - **Pixabay API key**: Free at https://pixabay.com/api/docs/ (set `PIXABAY_API_KEY` env var)

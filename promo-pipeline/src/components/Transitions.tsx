@@ -1,11 +1,12 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { BRAND } from "../brand";
 import type { TransitionType } from "../types";
 
 interface TransitionProps {
   type: TransitionType;
-  durationFrames: number; // total scene duration
-  transitionFrames?: number; // frames for the transition (default 15 = 0.5s)
+  durationFrames: number;
+  transitionFrames?: number;  // V2: per-transition duration (default 15)
   children: React.ReactNode;
 }
 
@@ -21,7 +22,30 @@ export const SceneWithTransition: React.FC<TransitionProps> = ({
     return <AbsoluteFill>{children}</AbsoluteFill>;
   }
 
-  // Fade in at start, fade out at end
+  // V2: cut-impact = hard cut with brief white flash
+  if (type === "cut-impact") {
+    const flashOpacity = interpolate(frame, [0, 3, 8], [0.6, 0.3, 0], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+
+    return (
+      <AbsoluteFill>
+        {children}
+        {frame < 8 && (
+          <AbsoluteFill
+            style={{
+              backgroundColor: BRAND.text,
+              opacity: flashOpacity,
+              pointerEvents: "none",
+            }}
+          />
+        )}
+      </AbsoluteFill>
+    );
+  }
+
+  // Fade
   if (type === "fade") {
     const fadeIn = interpolate(frame, [0, transitionFrames], [0, 1], {
       extrapolateLeft: "clamp",
@@ -41,7 +65,7 @@ export const SceneWithTransition: React.FC<TransitionProps> = ({
     );
   }
 
-  // Wipe left: clip-path based horizontal reveal
+  // Wipe left/right
   if (type === "wipe-left" || type === "wipe-right") {
     const direction = type === "wipe-left" ? 1 : -1;
     const enterPct = interpolate(frame, [0, transitionFrames], [0, 100], {
@@ -68,7 +92,7 @@ export const SceneWithTransition: React.FC<TransitionProps> = ({
     );
   }
 
-  // Zoom: scale + fade
+  // Zoom
   if (type === "zoom") {
     const enterScale = interpolate(frame, [0, transitionFrames], [0.9, 1], {
       extrapolateLeft: "clamp",
@@ -91,7 +115,6 @@ export const SceneWithTransition: React.FC<TransitionProps> = ({
       { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
     );
 
-    // Smooth blend between enter and exit scale (no abrupt midpoint switch)
     const blendFactor = interpolate(
       frame,
       [transitionFrames, durationFrames - transitionFrames],
@@ -112,6 +135,6 @@ export const SceneWithTransition: React.FC<TransitionProps> = ({
     );
   }
 
-  // Fallback: unknown transition type — render without transition
+  // Fallback
   return <AbsoluteFill>{children}</AbsoluteFill>;
 };

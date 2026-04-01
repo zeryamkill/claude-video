@@ -28,6 +28,7 @@ export const PromoVideo: React.FC<PromoVideoProps> = (props) => {
             <SceneWithTransition
               type={scene.transition}
               durationFrames={scene.durationFrames}
+              transitionFrames={scene.transitionDurationFrames}
             >
               <StockScene
                 scene={scene}

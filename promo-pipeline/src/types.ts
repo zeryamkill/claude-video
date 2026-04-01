@@ -1,8 +1,16 @@
-// Scene configuration types for the promo pipeline
+// Scene configuration types for the promo pipeline V2
 
 export type TextPosition = "center" | "lower-third" | "upper-left" | "upper-right";
 
-export type TransitionType = "fade" | "wipe-left" | "wipe-right" | "zoom" | "cut";
+export type TransitionType = "fade" | "wipe-left" | "wipe-right" | "zoom" | "cut" | "cut-impact";
+
+export type SceneIntent = "hook" | "problem" | "feature" | "proof" | "cta";
+
+export interface KenBurnsConfig {
+  start: number;   // starting scale (e.g. 1.0 or 1.06)
+  end: number;     // ending scale
+  origin: string;  // CSS transform-origin (e.g. "center center" or "40% 50%")
+}
 
 export interface ContrastFrame {
   time_sec: number;
@@ -20,23 +28,32 @@ export interface ContrastMap {
   frames: ContrastFrame[];
 }
 
+export interface SceneAudioConfig {
+  duckingLevel: number;       // per-scene ducking (e.g. 0.08 for CTA, 0.15 for proof)
+  duckingRampFrames: number;  // smooth ramp speed (5 for urgent, 15 for calm)
+}
+
 export interface SceneConfig {
   id: string;
   durationFrames: number;
-  stockPath: string;              // path relative to public/
+  stockPath: string;
   contrastMap: ContrastMap;
   headline?: string;
   subtext?: string;
   textPosition: TextPosition;
   transition: TransitionType;
-  voiceoverPath?: string;         // path relative to public/
+  transitionDurationFrames?: number;  // V2: per-transition duration (default 15)
+  voiceoverPath?: string;
+  intent?: SceneIntent;               // V2: scene intent for styling
+  kenBurns?: KenBurnsConfig;          // V2: directional Ken Burns
+  sceneAudio?: SceneAudioConfig;      // V2: per-scene audio settings
 }
 
 export interface SoundEffect {
   id: string;
-  frameStart: number;             // global frame where SFX starts
-  sfxPath: string;                // path relative to public/
-  volume: number;                 // 0-1
+  frameStart: number;
+  sfxPath: string;
+  volume: number;
 }
 
 export interface PromoVideoProps {
@@ -45,9 +62,9 @@ export interface PromoVideoProps {
   musicVolume: number;
   musicFadeInFrames: number;
   musicFadeOutFrames: number;
-  voiceoverDucking: number;       // music volume during voiceover (e.g. 0.15)
-  duckingFadeFrames?: number;     // smooth ducking ramp in frames (default 10)
-  soundEffects?: SoundEffect[];   // transition SFX at scene boundaries
+  voiceoverDucking: number;       // global fallback ducking level
+  duckingFadeFrames?: number;     // global fallback ramp (default 10)
+  soundEffects?: SoundEffect[];
 }
 
 // Adaptive text styling result

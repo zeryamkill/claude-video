@@ -12,7 +12,6 @@ export const AudioLayer: React.FC<AudioLayerProps> = ({
   totalFrames,
 }) => {
   const frame = useCurrentFrame();
-  const duckFade = props.duckingFadeFrames ?? 10;
 
   // Pre-compute scene start frames
   const sceneTimings = props.scenes.map((scene, i) => {
@@ -22,30 +21,34 @@ export const AudioLayer: React.FC<AudioLayerProps> = ({
     return { ...scene, startFrame };
   });
 
-  // Smooth ducking: compute target music volume based on voiceover activity
-  // Instead of instant switch, ramp over duckFade frames
+  // V2: Per-scene ducking with smooth ramps
+  // Find which scene is active and get its specific audio settings
+  const globalDuckLevel = props.voiceoverDucking || 0.15;
+  const globalRampFrames = props.duckingFadeFrames ?? 10;
   const baseVolume = props.musicVolume || 0.3;
-  const duckVolume = props.voiceoverDucking || 0.15;
 
-  // Find voiceover regions and compute ducking envelope
   let musicVol = baseVolume;
   for (const s of sceneTimings) {
     if (!s.voiceoverPath) continue;
+
+    // V2: Use per-scene ducking level and ramp speed
+    const duckLevel = s.sceneAudio?.duckingLevel ?? globalDuckLevel;
+    const rampFrames = s.sceneAudio?.duckingRampFrames ?? globalRampFrames;
+
     const voStart = s.startFrame;
     const voEnd = s.startFrame + s.durationFrames;
 
-    if (frame >= voStart - duckFade && frame < voEnd + duckFade) {
-      // Ramp down before voiceover, hold during, ramp up after
+    if (frame >= voStart - rampFrames && frame < voEnd + rampFrames) {
       const duckDown = interpolate(
         frame,
-        [voStart - duckFade, voStart],
-        [baseVolume, duckVolume],
+        [voStart - rampFrames, voStart],
+        [baseVolume, duckLevel],
         { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
       );
       const duckUp = interpolate(
         frame,
-        [voEnd, voEnd + duckFade],
-        [duckVolume, baseVolume],
+        [voEnd, voEnd + rampFrames],
+        [duckLevel, baseVolume],
         { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
       );
 
@@ -54,7 +57,7 @@ export const AudioLayer: React.FC<AudioLayerProps> = ({
       } else if (frame >= voEnd) {
         musicVol = duckUp;
       } else {
-        musicVol = duckVolume;
+        musicVol = duckLevel;
       }
       break;
     }
@@ -76,7 +79,6 @@ export const AudioLayer: React.FC<AudioLayerProps> = ({
 
   return (
     <>
-      {/* Background music with smooth ducking */}
       {props.musicPath && (
         <Audio
           src={staticFile(props.musicPath)}
@@ -84,7 +86,6 @@ export const AudioLayer: React.FC<AudioLayerProps> = ({
         />
       )}
 
-      {/* Per-scene voiceovers */}
       {sceneTimings
         .filter((s) => s.voiceoverPath)
         .map((s) => (
