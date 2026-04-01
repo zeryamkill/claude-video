@@ -14,7 +14,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-screenshot: Web Capture for Video Production
+# claude-video-screenshot — Web Capture for Video Production
 
 ## Pre-Flight
 
@@ -43,19 +43,19 @@ python3 scripts/web_capture.py \
 ```
 
 **Options:**
-- `--url "..."`: URL to capture
-- `--output capture.png`: Output file path
-- `--viewport WxH`: Browser viewport size (default: 1920x1080)
-- `--full-page`: Capture entire scrollable page (not just viewport)
-- `--element ".css-selector"`: Capture a specific element only
-- `--transparent`: Transparent background (omit page background)
-- `--hide ".ads,.cookie-banner,.popup"`: CSS selectors to hide via `display:none`
-- `--wait N`: Wait N seconds after page load before capture
-- `--wait-for ".selector"`: Wait for a specific element to appear
-- `--device "iPhone 15 Pro"`: Emulate a device (100+ presets)
-- `--dark-mode`: Emulate dark color scheme preference
-- `--locale en-US`: Set browser locale
-- `--timezone "America/New_York"`: Set browser timezone
+- `--url "..."` — URL to capture
+- `--output capture.png` — Output file path
+- `--viewport WxH` — Browser viewport size (default: 1920x1080)
+- `--full-page` — Capture entire scrollable page (not just viewport)
+- `--element ".css-selector"` — Capture a specific element only
+- `--transparent` — Transparent background (omit page background)
+- `--hide ".ads,.cookie-banner,.popup"` — CSS selectors to hide via `display:none`
+- `--wait N` — Wait N seconds after page load before capture
+- `--wait-for ".selector"` — Wait for a specific element to appear
+- `--device "iPhone 15 Pro"` — Emulate a device (100+ presets)
+- `--dark-mode` — Emulate dark color scheme preference
+- `--locale en-US` — Set browser locale
+- `--timezone "America/New_York"` — Set browser timezone
 
 ## Video-Native Presets
 
@@ -101,10 +101,10 @@ python3 scripts/web_capture.py \
 Uses Playwright's `record_video_dir` to capture the browser session. Useful for tutorial videos or documenting web interactions.
 
 **Options:**
-- `--record`: Enable video recording mode
-- `--duration N`: Recording duration in seconds
-- `--scroll`: Auto-scroll the page during recording
-- `--scroll-speed N`: Pixels per second for auto-scroll (default: 200)
+- `--record` — Enable video recording mode
+- `--duration N` — Recording duration in seconds
+- `--scroll` — Auto-scroll the page during recording
+- `--scroll-speed N` — Pixels per second for auto-scroll (default: 200)
 
 ## Ken Burns Animation
 
@@ -131,10 +131,10 @@ python3 scripts/web_capture.py \
 ```
 
 **Ken Burns options:**
-- `--ken-burns`: Auto-create Ken Burns video after screenshot
-- `--ken-burns-image FILE`: Apply Ken Burns to existing image
-- `--ken-burns-duration N`: Animation duration in seconds (default: 5)
-- `--ken-burns-direction zoom-in|zoom-out|pan-left|pan-right`: Animation direction
+- `--ken-burns` — Auto-create Ken Burns video after screenshot
+- `--ken-burns-image FILE` — Apply Ken Burns to existing image
+- `--ken-burns-duration N` — Animation duration in seconds (default: 5)
+- `--ken-burns-direction zoom-in|zoom-out|pan-left|pan-right` — Animation direction
 
 **FFmpeg command used internally:**
 ```bash
@@ -176,10 +176,10 @@ python3 scripts/web_capture.py --url "..." --inject-css "body { font-size: 24px 
 
 Screenshots can be used as:
 - **Overlay** on video via edit sub-skill PiP overlay
-- **Slideshow** source: capture multiple URLs, concatenate as slideshow with transitions
-- **Ken Burns** source: zoom/pan animation from static capture
-- **Tutorial B-roll**: browser recording for product demos
-- **Thumbnail** background: screenshot + text overlay
+- **Slideshow** source — capture multiple URLs, concatenate as slideshow with transitions
+- **Ken Burns** source — zoom/pan animation from static capture
+- **Tutorial B-roll** — browser recording for product demos
+- **Thumbnail** background — screenshot + text overlay
 
 ## Safety Rules
 

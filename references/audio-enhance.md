@@ -1,13 +1,13 @@
 # Audio Enhancement Reference
 
-## Demucs v4: Source Separation
+## Demucs v4 — Source Separation
 
 ### Models
 | Model | VRAM | SDR (vocals) | Speed | Notes |
 |-------|------|-------------|-------|-------|
 | htdemucs_ft | 7GB | 9.20 dB | 1x | Best quality (recommended) |
 | htdemucs | 5GB | 8.85 dB | 1.5x | Faster, good quality |
-| htdemucs_6s | 7GB |: | 0.8x | 6-stem (guitar + piano) |
+| htdemucs_6s | 7GB | — | 0.8x | 6-stem (guitar + piano) |
 
 ### Usage
 ```bash
@@ -29,7 +29,7 @@ demucs --two-stems vocals -n htdemucs_ft -d cuda video.mp4
 - **Create music-only** track for audio ducking workflow
 - **Extract effects** for remixing
 
-## DeepFilterNet3: AI Noise Reduction
+## DeepFilterNet3 — AI Noise Reduction
 
 ### Quality Comparison
 | Engine | PESQ Score | VRAM | Notes |
@@ -67,7 +67,7 @@ sf.write("clean.wav", enhanced, sr)
 - Field recordings with wind/traffic
 - Any audio where FFmpeg afftdn isn't sufficient
 
-## pyannote-audio 4.0: Speaker Diarization
+## pyannote-audio 4.0 — Speaker Diarization
 
 ### Setup
 ```bash
@@ -162,7 +162,7 @@ scipy.io.wavfile.write("voiceover.wav", rate=model.generation_config.sample_rate
 
 Bark supports non-verbal sounds: `[laughs]`, `[sighs]`, `[music]`, `[gasps]`
 
-## AudioSR: Audio Upsampling
+## AudioSR — Audio Upsampling
 
 ### What It Does
 - Input: 8-16kHz bandwidth (phone quality, compressed audio)

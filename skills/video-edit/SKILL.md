@@ -14,7 +14,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-edit: Video Editing Operations
+# claude-video-edit — Video Editing Operations
 
 ## Pre-Flight
 
@@ -208,7 +208,7 @@ ffmpeg -n -ss 00:01:30 -i "$INPUT" -frames:v 1 -q:v 2 thumbnail.jpg
 
 ### Privacy Blur (Face/Region Censoring)
 
-**Blur entire face region** (static coordinates: use ffprobe or MediaPipe to find face bounding box):
+**Blur entire face region** (static coordinates — use ffprobe or MediaPipe to find face bounding box):
 ```bash
 ffmpeg -n -i "$INPUT" -vf "delogo=x=200:y=100:w=150:h=150" "$OUTPUT"
 ```

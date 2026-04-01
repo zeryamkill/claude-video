@@ -12,7 +12,7 @@ allowed-tools:
   - Read
 ---
 
-# claude-video-export: Platform-Optimized Export
+# claude-video-export — Platform-Optimized Export
 
 ## Pre-Flight
 
@@ -165,7 +165,7 @@ Note: Twitter max 512MB / 2:20.
 ## Multi-Platform Export
 
 To export for multiple platforms at once, Claude should chain exports sequentially.
-Each export is independent: they share the same input but produce separate outputs.
+Each export is independent — they share the same input but produce separate outputs.
 
 ## Output Naming
 

@@ -14,7 +14,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-enhance-audio: AI Audio Enhancement
+# claude-video-enhance-audio — AI Audio Enhancement
 
 This sub-skill handles AI-model-based audio processing. For FFmpeg-native audio operations
 (loudnorm, EQ, compression, silence removal, mixing), use `claude-video-audio` instead.
@@ -38,12 +38,12 @@ python3 scripts/audio_enhance.py separate "$INPUT" \
 ```
 
 **Options:**
-- `--stems vocals`: Extract vocals only (most common for video)
-- `--stems all`: Separate into 4 stems: vocals, drums, bass, other
-- `--stems vocals,other`: Extract specific combination
-- `--model htdemucs_ft`: Best quality model (default, 7GB VRAM, SDR 9.20 dB)
-- `--model htdemucs`: Faster, slightly lower quality (5GB VRAM)
-- `--output FILE`: Output path (or directory for `--stems all`)
+- `--stems vocals` — Extract vocals only (most common for video)
+- `--stems all` — Separate into 4 stems: vocals, drums, bass, other
+- `--stems vocals,other` — Extract specific combination
+- `--model htdemucs_ft` — Best quality model (default, 7GB VRAM, SDR 9.20 dB)
+- `--model htdemucs` — Faster, slightly lower quality (5GB VRAM)
+- `--output FILE` — Output path (or directory for `--stems all`)
 
 **VRAM:** 7GB for htdemucs_ft. Model is unloaded after processing.
 
@@ -64,9 +64,9 @@ python3 scripts/audio_enhance.py diarize "$INPUT" \
 ```
 
 **Options:**
-- `--hf-token TOKEN`: HuggingFace token (required for pyannote models)
-- `--with-transcript`: Combine with WhisperX transcript for speaker-labeled text
-- `--output speakers.json`: Output path
+- `--hf-token TOKEN` — HuggingFace token (required for pyannote models)
+- `--with-transcript` — Combine with WhisperX transcript for speaker-labeled text
+- `--output speakers.json` — Output path
 
 **VRAM:** 2-4GB for pyannote, +6GB if `--with-transcript` (WhisperX runs sequentially).
 
@@ -106,8 +106,8 @@ ffmpeg -n -i "$INPUT" -af "afftdn=nf=-25:nt=w" -c:v copy "$OUTPUT"
 ```
 
 **Options:**
-- `--compensate-delay`: Compensate for processing delay (default: true)
-- `--atten-limit N`: Maximum attenuation in dB (default: 100)
+- `--compensate-delay` — Compensate for processing delay (default: true)
+- `--atten-limit N` — Maximum attenuation in dB (default: 100)
 
 ## TTS Voiceover Generation
 
@@ -122,7 +122,7 @@ python3 scripts/audio_enhance.py tts \
   --output voiceover.wav
 ```
 
-### ElevenLabs (Best Quality: API)
+### ElevenLabs (Best Quality — API)
 
 ```bash
 python3 scripts/audio_enhance.py tts --text "..." --provider elevenlabs --voice "Rachel" --output vo.wav
@@ -132,7 +132,7 @@ python3 scripts/audio_enhance.py tts --text "..." --provider elevenlabs --voice 
 - Requires: `ELEVENLABS_API_KEY` env var
 - Voices: 10,000+ available
 
-### OpenAI TTS (Good Quality: API)
+### OpenAI TTS (Good Quality — API)
 
 ```bash
 python3 scripts/audio_enhance.py tts --text "..." --provider openai --voice alloy --output vo.wav
@@ -143,14 +143,14 @@ python3 scripts/audio_enhance.py tts --text "..." --provider openai --voice allo
 - Voices: alloy, echo, fable, onyx, nova, shimmer, ash, ballad, coral, sage, ember, vale, verse
 - `--model tts-1-hd` for higher quality
 
-### Bark (Local: Free)
+### Bark (Local — Free)
 
 ```bash
 python3 scripts/audio_enhance.py tts --text "..." --provider bark --output vo.wav
 ```
 - Quality: Good, expressive, supports non-verbal sounds
 - Cost: Free
-- VRAM: 12GB (exclusive use: unloads all other models)
+- VRAM: 12GB (exclusive use — unloads all other models)
 - Supports: laughter, sighs, music (via text prompts like `[laughs]`)
 
 **Cost confirmation:** Always confirm before API-based TTS generation.
@@ -173,9 +173,9 @@ python3 scripts/audio_enhance.py upsample "$INPUT" \
 - Dramatically improves clarity and presence
 
 **Options:**
-- `--model speech`: Optimized for speech content (default)
-- `--model music`: Optimized for music content
-- `--model general`: General purpose
+- `--model speech` — Optimized for speech content (default)
+- `--model music` — Optimized for music content
+- `--model general` — General purpose
 
 ## Routing Guide: This Sub-Skill vs claude-video-audio
 

@@ -15,13 +15,13 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-shorts: Longform to Shortform Pipeline (V3)
+# claude-video-shorts — Longform to Shortform Pipeline (V3)
 
 ## One-Command Pipeline
 
 ### V3 Screen-Aware Pipeline (recommended)
 
-For screen recordings, tutorials, and mixed content: uses VLM for visual analysis:
+For screen recordings, tutorials, and mixed content — uses VLM for visual analysis:
 
 ```bash
 source ~/.video-skill/bin/activate && bash scripts/screen_shorts_pipeline.sh "$INPUT" \
@@ -95,7 +95,7 @@ VLM analyzes each frame and suggests zoom regions. The crop position (X) varies:
 - **Center-aligned content** (title pages, score circles): x_pct ~0.35
 - **Right-aligned content** (sidebars, panels): x_pct ~0.55
 
-Multiple zoom regions within a clip create **jump cuts** (not smooth pan): this matches natural scroll/section transitions in screen recordings.
+Multiple zoom regions within a clip create **jump cuts** (not smooth pan) — this matches natural scroll/section transitions in screen recordings.
 
 ## Multi-Modal Scoring (V3)
 
@@ -171,7 +171,7 @@ Words per line: 3
 ## Safety Rules
 
 1. Always run `bash scripts/preflight.sh "$INPUT" "$OUTPUT"` before writes
-2. Never overwrite source video: all shorts are new files
+2. Never overwrite source video — all shorts are new files
 3. Confirm before processing videos longer than 60 minutes
 4. Clean up temp files after pipeline completes
 5. Report estimated processing time before starting

@@ -12,7 +12,7 @@ allowed-tools:
   - Read
 ---
 
-# claude-video-audio: Audio Processing
+# claude-video-audio — Audio Processing
 
 ## Pre-Flight
 
@@ -75,7 +75,7 @@ ffmpeg -i "$INPUT" -af "silencedetect=noise=-30dB:d=0.5" -f null - 2>&1 | grep s
 ```
 Returns `silence_start` and `silence_end` timestamps.
 
-**Remove silence** (using Auto-Editor: much easier):
+**Remove silence** (using Auto-Editor — much easier):
 ```bash
 auto-editor "$INPUT" --margin 0.3s -o "$OUTPUT"
 ```

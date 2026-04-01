@@ -17,13 +17,13 @@ allowed-tools:
   - Grep
 ---
 
-# claude-video: CLI-Native Video Editing for Claude Code
+# claude-video — CLI-Native Video Editing for Claude Code
 
 ## Quick Reference
 
 | Command | What it does |
 |---------|-------------|
-| `/video` | Interactive mode: describe what you want in plain English |
+| `/video` | Interactive mode — describe what you want in plain English |
 | `/video setup` | Install all dependencies (faster-whisper, auto-editor, scenedetect, yt-dlp, mediainfo) |
 | `/video edit` | Trim, cut, split, merge, speed, crop, overlay, stabilize, transitions |
 | `/video transcode` | Convert codecs, compress, GPU-accelerated encoding, two-pass |
@@ -83,11 +83,11 @@ For complex requests that span multiple sub-skills (e.g., "download this YouTube
 3. Use temp files in `/tmp/claude-video/` for intermediate outputs
 4. Clean up temp files after final output is produced
 
-## Safety Rules: MANDATORY
+## Safety Rules — MANDATORY
 
 1. **Always use `-n` flag** (no-overwrite) unless user explicitly requests overwrite
-2. **Never let output path equal input path**: run `bash scripts/preflight.sh "$INPUT" "$OUTPUT"` before any write
-3. **Never delete source files**: all operations produce new files
+2. **Never let output path equal input path** — run `bash scripts/preflight.sh "$INPUT" "$OUTPUT"` before any write
+3. **Never delete source files** — all operations produce new files
 4. **Run preflight before every write operation**: `bash scripts/preflight.sh <input> <output>`
 5. **Confirm before**: batch operations (>3 files), downloads, operations estimated >5 minutes
 6. **Auto-execute without confirmation**: ffprobe analysis, thumbnail extraction, GPU detection, metadata reading
@@ -121,7 +121,7 @@ All Python scripts in `scripts/` that use AI models (`segment_scorer.py`, `face_
 `image_generate.py`, `video_generate.py`, `audio_enhance.py`, `video_enhance.py`, `web_capture.py`)
 require activation: `source ~/.video-skill/bin/activate`
 
-## VRAM Management (16GB Budget: RTX 5070 Ti)
+## VRAM Management (16GB Budget — RTX 5070 Ti)
 
 Before loading any GPU model, check free VRAM:
 ```bash
@@ -148,9 +148,9 @@ nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits
 
 ### Codec Selection Priority
 - **Stream copy** (`-c copy`): when no re-encoding needed (trim, remux, extract)
-- **AV1** (`av1_nvenc` or `libsvtav1`): best compression, royalty-free: default for new encodes
+- **AV1** (`av1_nvenc` or `libsvtav1`): best compression, royalty-free — default for new encodes
 - **H.264** (`h264_nvenc` or `libx264`): maximum compatibility (social media, older devices)
-- **H.265** (`hevc_nvenc` or `libx265`): good compression + wide support: use when user requests
+- **H.265** (`hevc_nvenc` or `libx265`): good compression + wide support — use when user requests
 
 ### Quality Defaults
 - H.264: CRF 20 (CPU) / CQ 21 (NVENC)
@@ -160,65 +160,65 @@ nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits
 
 ## Reference Files
 
-Load on-demand as needed: do NOT load all at startup:
+Load on-demand as needed — do NOT load all at startup:
 
-- `references/transcode.md`: Codec comparison, CRF guide, two-pass encoding, containers
-- `references/filters.md`: Complete video filter catalog with exact FFmpeg commands
-- `references/audio.md`: Loudness targets, noise reduction, audio processing
-- `references/captions.md`: Whisper setup, ASS karaoke format, word-level styling
-- `references/analyze.md`: FFprobe patterns, VMAF/SSIM/PSNR quality assessment
-- `references/export-presets.md`: Platform-specific export commands (YouTube, TikTok, etc.)
-- `references/gpu-accel.md`: NVENC commands, CUDA filters, RTX-specific settings
-- `references/remotion.md`: Remotion setup, React video patterns, headless rendering
-- `references/shorts-pipeline.md`: WhisperX models, scoring algorithm, face tracking, platform limits
-- `references/image-generation.md`: FLUX.2, SD 3.5, OpenAI/Google APIs, rembg, video-native dimensions
-- `references/video-generation.md`: Veo 3.1, Runway Gen-4, SVD local, polling, cost formulas
-- `references/web-capture.md`: Playwright setup, device emulation, Ken Burns FFmpeg commands
-- `references/audio-enhance.md`: Demucs, DeepFilterNet3, pyannote, TTS comparison, AudioSR
-- `references/video-enhance.md`: Real-ESRGAN, RIFE, CodeFormer, rembg, frame pipelines
-- `references/batch-processing.md`: GNU parallel + NVENC concurrency, batch AI, error handling
+- `references/transcode.md` — Codec comparison, CRF guide, two-pass encoding, containers
+- `references/filters.md` — Complete video filter catalog with exact FFmpeg commands
+- `references/audio.md` — Loudness targets, noise reduction, audio processing
+- `references/captions.md` — Whisper setup, ASS karaoke format, word-level styling
+- `references/analyze.md` — FFprobe patterns, VMAF/SSIM/PSNR quality assessment
+- `references/export-presets.md` — Platform-specific export commands (YouTube, TikTok, etc.)
+- `references/gpu-accel.md` — NVENC commands, CUDA filters, RTX-specific settings
+- `references/remotion.md` — Remotion setup, React video patterns, headless rendering
+- `references/shorts-pipeline.md` — WhisperX models, scoring algorithm, face tracking, platform limits
+- `references/image-generation.md` — FLUX.2, SD 3.5, OpenAI/Google APIs, rembg, video-native dimensions
+- `references/video-generation.md` — Veo 3.1, Runway Gen-4, SVD local, polling, cost formulas
+- `references/web-capture.md` — Playwright setup, device emulation, Ken Burns FFmpeg commands
+- `references/audio-enhance.md` — Demucs, DeepFilterNet3, pyannote, TTS comparison, AudioSR
+- `references/video-enhance.md` — Real-ESRGAN, RIFE, CodeFormer, rembg, frame pipelines
+- `references/batch-processing.md` — GNU parallel + NVENC concurrency, batch AI, error handling
 
 ## Sub-Skills
 
-- `claude-video-edit`: Video editing: trim, cut, split, merge, speed, crop, overlay, stabilize, transitions
-- `claude-video-transcode`: Codec conversion, compression, GPU encoding, two-pass, container remux
-- `claude-video-audio`: Audio normalization, noise reduction, mixing, extraction, silence removal
-- `claude-video-caption`: Speech-to-text transcription, animated subtitles, burn-in styling
-- `claude-video-analyze`: Video inspection, quality metrics, scene detection, metadata analysis
-- `claude-video-export`: Platform-optimized exports (YouTube, TikTok, Instagram, LinkedIn, Web, GIF, Podcast)
-- `claude-video-download`: Video downloading via yt-dlp with format and quality selection
-- `claude-video-create`: Programmatic video creation via Remotion (React-based motion graphics)
-- `claude-video-shorts`: Longform → shortform pipeline: transcribe, score, crop 9:16, caption, export
-- `claude-video-image`: AI image generation: Gemini 3 Pro Image, FLUX.2 local, SD 3.5, OpenAI API, rembg
-- `claude-video-generate`: AI video generation: Veo 3.1, Runway Gen-4 Turbo, local SVD
-- `claude-video-screenshot`: Web capture: Playwright screenshots, recordings, Ken Burns animation
-- `claude-video-enhance-audio`: AI audio: Demucs separation, DeepFilter denoise, TTS, diarize, AudioSR
-- `claude-video-enhance`: AI video: Real-ESRGAN upscale, RIFE interpolation, CodeFormer face restore, rembg
+- `claude-video-edit` — Video editing: trim, cut, split, merge, speed, crop, overlay, stabilize, transitions
+- `claude-video-transcode` — Codec conversion, compression, GPU encoding, two-pass, container remux
+- `claude-video-audio` — Audio normalization, noise reduction, mixing, extraction, silence removal
+- `claude-video-caption` — Speech-to-text transcription, animated subtitles, burn-in styling
+- `claude-video-analyze` — Video inspection, quality metrics, scene detection, metadata analysis
+- `claude-video-export` — Platform-optimized exports (YouTube, TikTok, Instagram, LinkedIn, Web, GIF, Podcast)
+- `claude-video-download` — Video downloading via yt-dlp with format and quality selection
+- `claude-video-create` — Programmatic video creation via Remotion (React-based motion graphics)
+- `claude-video-shorts` — Longform → shortform pipeline: transcribe, score, crop 9:16, caption, export
+- `claude-video-image` — AI image generation: Gemini 3 Pro Image, FLUX.2 local, SD 3.5, OpenAI API, rembg
+- `claude-video-generate` — AI video generation: Veo 3.1, Runway Gen-4 Turbo, local SVD
+- `claude-video-screenshot` — Web capture: Playwright screenshots, recordings, Ken Burns animation
+- `claude-video-enhance-audio` — AI audio: Demucs separation, DeepFilter denoise, TTS, diarize, AudioSR
+- `claude-video-enhance` — AI video: Real-ESRGAN upscale, RIFE interpolation, CodeFormer face restore, rembg
 
 ## Scripts
 
-- `scripts/setup.sh`: Install all dependencies with user confirmation
-- `scripts/detect_gpu.sh`: Detect NVIDIA NVENC, list encoders (JSON output)
-- `scripts/check_deps.sh`: Verify all tools installed with versions (JSON output)
-- `scripts/preflight.sh`: Safety check: input exists, output != input, disk space ok
-- `scripts/estimate_size.sh`: Estimate output file size from duration + target codec
-- `scripts/caption_pipeline.sh`: End-to-end: audio extract → whisper → ASS → burn-in
-- `scripts/shorts_pipeline.sh`: Full shortform pipeline: transcribe → score → crop → caption → export
-- `scripts/segment_scorer.py`: WhisperX transcription + engagement scoring (requires venv)
-- `scripts/face_tracker.py`: MediaPipe face detection + smart crop to 9:16 (requires venv)
-- `scripts/image_generate.py`: FLUX.2 / SD 3.5 / OpenAI image generation (requires venv)
-- `scripts/video_generate.py`: Veo / Runway / SVD video generation (requires venv)
-- `scripts/web_capture.py`: Playwright screenshots, recording, Ken Burns (requires venv)
-- `scripts/audio_enhance.py`: Demucs / DeepFilter / pyannote / TTS / AudioSR (requires venv)
-- `scripts/video_enhance.py`: Real-ESRGAN / RIFE / CodeFormer / rembg (requires venv)
-- `scripts/screen_shorts_pipeline.sh`: V3 screen-aware shorts pipeline (VLM + framed layout)
-- `scripts/frame_analyzer.py`: VLM frame analysis via Gemini 2.5 Flash (requires venv + GOOGLE_API_KEY)
-- `scripts/topic_segmenter.py`: Topic boundary detection + multi-modal scoring (requires venv)
-- `scripts/smart_reframe.py`: Content-aware vertical reframe with framed layout (requires venv)
+- `scripts/setup.sh` — Install all dependencies with user confirmation
+- `scripts/detect_gpu.sh` — Detect NVIDIA NVENC, list encoders (JSON output)
+- `scripts/check_deps.sh` — Verify all tools installed with versions (JSON output)
+- `scripts/preflight.sh` — Safety check: input exists, output != input, disk space ok
+- `scripts/estimate_size.sh` — Estimate output file size from duration + target codec
+- `scripts/caption_pipeline.sh` — End-to-end: audio extract → whisper → ASS → burn-in
+- `scripts/shorts_pipeline.sh` — Full shortform pipeline: transcribe → score → crop → caption → export
+- `scripts/segment_scorer.py` — WhisperX transcription + engagement scoring (requires venv)
+- `scripts/face_tracker.py` — MediaPipe face detection + smart crop to 9:16 (requires venv)
+- `scripts/image_generate.py` — FLUX.2 / SD 3.5 / OpenAI image generation (requires venv)
+- `scripts/video_generate.py` — Veo / Runway / SVD video generation (requires venv)
+- `scripts/web_capture.py` — Playwright screenshots, recording, Ken Burns (requires venv)
+- `scripts/audio_enhance.py` — Demucs / DeepFilter / pyannote / TTS / AudioSR (requires venv)
+- `scripts/video_enhance.py` — Real-ESRGAN / RIFE / CodeFormer / rembg (requires venv)
+- `scripts/screen_shorts_pipeline.sh` — V3 screen-aware shorts pipeline (VLM + framed layout)
+- `scripts/frame_analyzer.py` — VLM frame analysis via Gemini 2.5 Flash (requires venv + GOOGLE_API_KEY)
+- `scripts/topic_segmenter.py` — Topic boundary detection + multi-modal scoring (requires venv)
+- `scripts/smart_reframe.py` — Content-aware vertical reframe with framed layout (requires venv)
 
 ## Agents
 
 For complex multi-step tasks, delegate to specialized agents via Task tool:
-- `claude-video-encoder`: Complex encoding pipelines (multi-pass, multi-output, batch)
-- `claude-video-analyst`: Deep quality assessment and comprehensive video analysis
-- `claude-video-producer`: Production pipeline specialist (multi-step, VRAM management, cost tracking)
+- `claude-video-encoder` — Complex encoding pipelines (multi-pass, multi-output, batch)
+- `claude-video-analyst` — Deep quality assessment and comprehensive video analysis
+- `claude-video-producer` — Production pipeline specialist (multi-step, VRAM management, cost tracking)

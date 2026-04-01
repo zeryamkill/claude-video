@@ -1,6 +1,6 @@
 # Image Generation Reference
 
-## FLUX.2 klein 4B (Local: Primary)
+## FLUX.2 klein 4B (Local — Primary)
 
 - **License**: Apache 2.0 (commercial-friendly)
 - **VRAM**: 13GB (BF16), ~8GB (INT8 quantized)
@@ -34,7 +34,7 @@ pipe = FluxPipeline.from_pretrained(
 )
 ```
 
-## Stable Diffusion 3.5 Medium (Local: Fallback)
+## Stable Diffusion 3.5 Medium (Local — Fallback)
 
 - **License**: Community (free under $1M revenue)
 - **VRAM**: 6GB (FP16)
@@ -51,7 +51,7 @@ pipe = StableDiffusion3Pipeline.from_pretrained(
 image = pipe("Professional headshot, studio lighting", num_inference_steps=28).images[0]
 ```
 
-## OpenAI GPT Image 1 (API: For Transparent PNGs)
+## OpenAI GPT Image 1 (API — For Transparent PNGs)
 
 - **Pricing**: $0.005 (mini), $0.034 (medium), $0.20 (high quality)
 - **Transparent background**: Native support
@@ -76,7 +76,7 @@ with open("overlay.png", "wb") as f:
     f.write(image_data)
 ```
 
-## Gemini 3 Pro Image / Nano Banana Pro (API: Primary)
+## Gemini 3 Pro Image / Nano Banana Pro (API — Primary)
 
 - **Model ID**: `gemini-3-pro-image-preview`
 - **Pricing**: $0.13 (1K/2K), $0.24 (4K) per image
@@ -107,7 +107,7 @@ for part in response.candidates[0].content.parts:
         break
 ```
 
-**Also available:** Gemini 2.5 Flash Image (`gemini-2.5-flash-image`): cheaper at $0.039/image but lower quality.
+**Also available:** Gemini 2.5 Flash Image (`gemini-2.5-flash-image`) — cheaper at $0.039/image but lower quality.
 
 ## Background Removal (rembg)
 
@@ -123,9 +123,9 @@ rembg i input.png output_transparent.png
 rembg p input_dir/ output_dir/ -m u2net_human_seg
 
 # Models:
-# u2net_human_seg: optimized for humans (recommended for video)
-# u2net: general purpose
-# isnet-general-use: alternative general model
+# u2net_human_seg — optimized for humans (recommended for video)
+# u2net — general purpose
+# isnet-general-use — alternative general model
 ```
 
 **Combine with FLUX for free transparent images:**

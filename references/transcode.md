@@ -19,7 +19,7 @@ Each ±6 CRF roughly doubles or halves the bitrate.
 ## CPU Speed Presets
 
 libx264/libx265: ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow
-- **medium** is the default: good balance
+- **medium** is the default — good balance
 - **slow** gives ~5-10% better compression for ~40% more time
 - **veryslow** gives ~10-15% better compression for ~3x more time
 - Never use ultrafast for final delivery
@@ -56,10 +56,10 @@ Target bitrate formula: `bitrate = target_size_bits / duration_seconds`
 
 ## Essential Flags
 
-- `-movflags +faststart`: ALWAYS for MP4 (moves metadata for streaming)
-- `-pix_fmt yuv420p`: Maximum compatibility
-- `-pix_fmt yuv420p10le`: 10-bit (AV1, HDR)
-- `-tag:v hvc1`: Required for H.265 on Apple devices
-- `-profile:v high -level 4.1`: H.264 compatibility profile
-- `-c copy`: Stream copy (no re-encode, instant)
-- `-n`: Never overwrite existing output
+- `-movflags +faststart` — ALWAYS for MP4 (moves metadata for streaming)
+- `-pix_fmt yuv420p` — Maximum compatibility
+- `-pix_fmt yuv420p10le` — 10-bit (AV1, HDR)
+- `-tag:v hvc1` — Required for H.265 on Apple devices
+- `-profile:v high -level 4.1` — H.264 compatibility profile
+- `-c copy` — Stream copy (no re-encode, instant)
+- `-n` — Never overwrite existing output

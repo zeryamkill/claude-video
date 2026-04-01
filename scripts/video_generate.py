@@ -111,7 +111,40 @@ def generate_veo(prompt, image_path=None, extend_path=None,
     # Download result
     if operation.response and operation.response.generated_videos:
         video = operation.response.generated_videos[0]
-        video.video.save(output_path)
+        # Method 1: Try client.files.download (authenticated)
+        try:
+            fname = video.video.uri.split("/")[-1] if video.video.uri else None
+            if fname:
+                print(f"  Downloading via API...", file=sys.stderr, flush=True)
+                dl = client.files.download(file=fname)
+                with open(output_path, "wb") as f:
+                    f.write(dl)
+            else:
+                raise ValueError("No filename in URI")
+        except Exception as e1:
+            print(f"  Method 1 failed ({e1}), trying direct save...", file=sys.stderr, flush=True)
+            # Method 2: Try direct save
+            try:
+                video.video.save(output_path)
+            except Exception as e2:
+                print(f"  Method 2 failed ({e2}), trying requests...", file=sys.stderr, flush=True)
+                # Method 3: Try requests with API key in URL
+                import urllib.request
+                video_uri = video.video.uri
+                if not video_uri:
+                    print(json.dumps({"error": "No video URI available"}))
+                    sys.exit(1)
+                # Append API key for authenticated access
+                separator = "&" if "?" in video_uri else "?"
+                auth_uri = f"{video_uri}{separator}key={api_key}"
+                try:
+                    urllib.request.urlretrieve(auth_uri, output_path)
+                except Exception as e3:
+                    print(json.dumps({
+                        "error": f"All download methods failed: {e1}, {e2}, {e3}",
+                        "uri": video_uri
+                    }))
+                    sys.exit(1)
     else:
         print(json.dumps({"error": "No video generated", "operation": str(operation)}))
         sys.exit(1)

@@ -5,7 +5,7 @@
 React-based framework for creating videos programmatically. Claude writes React components, Remotion renders each frame headlessly via Chrome, then FFmpeg assembles the video.
 
 **Best for**: text animations, data visualizations, motion graphics, branded templates, anything that needs React/CSS power.
-**Not for**: simple operations (trimming, transcoding, overlays): use FFmpeg directly.
+**Not for**: simple operations (trimming, transcoding, overlays) — use FFmpeg directly.
 
 ## Prerequisites
 

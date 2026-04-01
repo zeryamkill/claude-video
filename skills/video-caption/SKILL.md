@@ -13,7 +13,7 @@ allowed-tools:
   - Write
 ---
 
-# claude-video-caption: Transcription and Animated Subtitles
+# claude-video-caption — Transcription and Animated Subtitles
 
 ## Pre-Flight
 
@@ -203,18 +203,18 @@ ffmpeg -n -i input.srt -itsoffset 2 output.srt
 ## ASS Styling Reference
 
 Key ASS override tags for caption customization:
-- `\fn{FontName}`: change font
-- `\fs{Size}`: font size
-- `\c&HBBGGRR&`: primary color (BGR format, not RGB)
-- `\3c&HBBGGRR&`: outline color
-- `\bord{Width}`: outline width
-- `\shad{Depth}`: shadow depth
-- `\fscx{%}\fscy{%}`: scale X/Y (for "pop" animation: `\fscx120\fscy120`)
-- `\fad(FadeIn,FadeOut)`: fade timing in ms
-- `\kf{Duration}`: karaoke smooth fill (duration in centiseconds)
-- `\K{Duration}`: karaoke instant fill
-- `\an{Position}`: alignment (1-9 numpad layout, 2=bottom-center, 8=top-center)
-- `\pos(x,y)`: absolute position
+- `\fn{FontName}` — change font
+- `\fs{Size}` — font size
+- `\c&HBBGGRR&` — primary color (BGR format, not RGB)
+- `\3c&HBBGGRR&` — outline color
+- `\bord{Width}` — outline width
+- `\shad{Depth}` — shadow depth
+- `\fscx{%}\fscy{%}` — scale X/Y (for "pop" animation: `\fscx120\fscy120`)
+- `\fad(FadeIn,FadeOut)` — fade timing in ms
+- `\kf{Duration}` — karaoke smooth fill (duration in centiseconds)
+- `\K{Duration}` — karaoke instant fill
+- `\an{Position}` — alignment (1-9 numpad layout, 2=bottom-center, 8=top-center)
+- `\pos(x,y)` — absolute position
 
 ## Common Presets
 
