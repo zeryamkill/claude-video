@@ -220,3 +220,7 @@ ffmpeg -n -i "$INPUT" -i music.mp3 -filter_complex \
 - Shorter `attack` (e.g., 50ms) for spoken word podcasts
 - Longer `release` (e.g., 2000ms) for smoother music return
 - Adjust `weights` to control the overall voice-to-music balance
+
+## Reference
+
+Load `references/audio.md` for extended EBU R128 loudness details, advanced filter chains, and format-specific audio settings.

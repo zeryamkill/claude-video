@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2026-04-06
+
+### Fixed
+- **video-promo hardcoded paths**: replaced all `~/Desktop/claude-veo/` paths with plugin-relative `promo-pipeline/` paths (was broken for all users except author)
+- **video_generate.py tier ternary**: fast and standard tiers now correctly map to different Veo model names (`veo-3.1-generate-preview` vs `veo-3.1-generate`)
+- **face_tracker.py security**: replaced deprecated `tempfile.mktemp()` with `NamedTemporaryFile(delete=False)` to eliminate TOCTOU race condition
+- **segment_scorer.py security**: same `tempfile.mktemp()` fix
+- **audio_enhance.py double diarization**: `with_transcript` mode now skips standalone pyannote pass and goes directly to WhisperX combined pipeline (halves GPU usage and processing time)
+- **image_generate.py torch guard**: `ensure_vram()` now handles missing torch gracefully with `try/except ImportError` (API-only users no longer crash)
+- **pyproject.toml version**: synced from 1.0.0 to 1.1.0 to match plugin.json
+
+### Added
+- Reference file pointers for 5 sub-skills: video-audio, video-create, video-export, video-transcode, video-analyze (reference docs were previously unreachable)
+- Natural-language trigger phrases for video-transcode: "make smaller", "file too big", "shrink video", "smaller file", "video too large"
+
 ## [1.1.0] - 2026-04-01
 
 ### Added

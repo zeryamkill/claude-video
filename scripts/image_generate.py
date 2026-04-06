@@ -34,12 +34,16 @@ def get_free_vram_mb():
 
 
 def ensure_vram(required_mb):
-    """Ensure enough VRAM is available."""
-    import torch
-    import gc
-    torch.cuda.empty_cache()
-    gc.collect()
-    torch.cuda.empty_cache()
+    """Ensure enough VRAM is available. Safe to call without torch installed."""
+    try:
+        import torch
+        import gc
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            gc.collect()
+            torch.cuda.empty_cache()
+    except ImportError:
+        pass  # No torch = no GPU, skip VRAM check
     free = get_free_vram_mb()
     if free < required_mb:
         print(json.dumps({

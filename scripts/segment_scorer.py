@@ -325,7 +325,9 @@ def score(args):
 
     # Extract audio for energy analysis
     import tempfile
-    audio_tmp = tempfile.mktemp(suffix=".wav")
+    audio_fd = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+    audio_tmp = audio_fd.name
+    audio_fd.close()
     try:
         extract_audio_for_scoring(input_path, audio_tmp)
 

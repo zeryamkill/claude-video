@@ -142,46 +142,14 @@ def diarize(args):
         }))
         sys.exit(1)
 
-    if not ensure_vram(4000):
-        sys.exit(1)
-
     start = time.time()
-
-    from pyannote.audio import Pipeline
     import torch
 
-    pipeline = Pipeline.from_pretrained(
-        "pyannote/speaker-diarization-3.1",
-        use_auth_token=hf_token
-    )
-    pipeline.to(torch.device("cuda"))
-
-    diarization = pipeline(input_path)
-
-    # Convert to serializable format
-    speakers = set()
-    segments = []
-    for turn, _, speaker in diarization.itertracks(yield_label=True):
-        speakers.add(speaker)
-        segments.append({
-            "speaker": speaker,
-            "start": round(turn.start, 3),
-            "end": round(turn.end, 3),
-            "duration": round(turn.end - turn.start, 3)
-        })
-
-    result = {
-        "speakers": sorted(speakers),
-        "speaker_count": len(speakers),
-        "segments": segments
-    }
-
-    # Optionally combine with WhisperX transcript
     if with_transcript:
+        # Combined diarization + transcription via WhisperX
+        # Skips standalone pyannote pass since WhisperX runs its own diarization
         import whisperx
         import gc
-
-        unload_model(pipeline)
 
         if not ensure_vram(6000):
             sys.exit(1)
@@ -194,17 +162,66 @@ def diarize(args):
         model_a, metadata = whisperx.load_align_model(language_code="en", device=device)
         transcript = whisperx.align(transcript["segments"], model_a, metadata, audio, device)
 
-        # Assign speakers to transcript segments
+        # WhisperX diarization assigns speakers to transcript segments
         diarize_df = whisperx.DiarizationPipeline(use_auth_token=hf_token, device=device)
         diarize_result = diarize_df(input_path)
         transcript = whisperx.assign_word_speakers(diarize_result, transcript)
 
-        result["transcript_segments"] = transcript["segments"]
+        # Extract speaker segments from diarization result
+        speakers = set()
+        segments = []
+        for seg in transcript.get("segments", []):
+            speaker = seg.get("speaker", "UNKNOWN")
+            speakers.add(speaker)
+            segments.append({
+                "speaker": speaker,
+                "start": round(seg["start"], 3),
+                "end": round(seg["end"], 3),
+                "duration": round(seg["end"] - seg["start"], 3)
+            })
+
+        result = {
+            "speakers": sorted(speakers),
+            "speaker_count": len(speakers),
+            "segments": segments,
+            "transcript_segments": transcript["segments"]
+        }
 
         del model, model_a
         gc.collect()
         torch.cuda.empty_cache()
     else:
+        # Standalone diarization only (no transcript)
+        if not ensure_vram(4000):
+            sys.exit(1)
+
+        from pyannote.audio import Pipeline
+
+        pipeline = Pipeline.from_pretrained(
+            "pyannote/speaker-diarization-3.1",
+            use_auth_token=hf_token
+        )
+        pipeline.to(torch.device("cuda"))
+
+        diarization = pipeline(input_path)
+
+        speakers = set()
+        segments = []
+        for turn, _, speaker in diarization.itertracks(yield_label=True):
+            speakers.add(speaker)
+            segments.append({
+                "speaker": speaker,
+                "start": round(turn.start, 3),
+                "end": round(turn.end, 3),
+                "duration": round(turn.end - turn.start, 3)
+            })
+
+        result = {
+            "speakers": sorted(speakers),
+            "speaker_count": len(speakers),
+            "segments": segments
+        }
+
         unload_model(pipeline)
 
     with open(output_path, "w") as f:

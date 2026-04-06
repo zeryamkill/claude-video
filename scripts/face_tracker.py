@@ -70,7 +70,9 @@ def process_video(input_path, output_path, target_aspect=(9, 16),
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # Temp output for video (no audio)
-    tmp_video = tempfile.mktemp(suffix=".mp4")
+    tmp_fd = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False)
+    tmp_video = tmp_fd.name
+    tmp_fd.close()
 
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
     writer = cv2.VideoWriter(tmp_video, fourcc, fps, (output_width, output_height))

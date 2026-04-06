@@ -206,3 +206,7 @@ After Remotion renders a video, pipe it into other claude-video sub-skills:
 - First render downloads Chrome Headless (~200MB)
 - Remotion licensing: free for individuals, paid for companies with 4+ employees
 - Not suitable for simple operations (use FFmpeg directly for those)
+
+## Reference
+
+Load `references/remotion.md` for Remotion API patterns, component architecture, and rendering configuration.

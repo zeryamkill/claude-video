@@ -198,3 +198,7 @@ For a full video report, run all of the above and format the output. Key section
 4. Chapters (if present)
 5. Keyframe structure (GOP length, keyframe interval)
 6. Recommendations (codec efficiency, loudness compliance, compatibility issues)
+
+## Reference
+
+Load `references/analyze.md` for VMAF/SSIM/PSNR quality metric details, scene detection parameters, and advanced FFprobe recipes.

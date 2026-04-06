@@ -171,3 +171,7 @@ Each export is independent — they share the same input but produce separate ou
 
 Auto-generated output names use the pattern: `{input_basename}_{platform}.{ext}`
 - `video.mp4` → `video_youtube.mp4`, `video_tiktok.mp4`, `video_ig_square.mp4`
+
+## Reference
+
+Load `references/export-presets.md` for detailed per-platform codec settings, bitrate targets, and container requirements.

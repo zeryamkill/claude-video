@@ -60,7 +60,7 @@ def generate_veo(prompt, image_path=None, extend_path=None,
 
     client = genai.Client()
 
-    model_name = "veo-3.1-generate-preview" if tier == "fast" else "veo-3.1-generate-preview"
+    model_name = "veo-3.1-generate-preview" if tier == "fast" else "veo-3.1-generate"
 
     config = types.GenerateVideosConfig(
         aspect_ratio=aspect,

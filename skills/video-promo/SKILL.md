@@ -58,7 +58,7 @@ Uses worst-case zone brightness (not average) plus variance detection:
 - **Pexels API key** (optional): Free at https://www.pexels.com/api/ (set `PEXELS_API_KEY` env var)
 - **FFmpeg**: Required for video preprocessing and contrast analysis
 - **Node.js + npm**: For Remotion rendering
-- **Remotion project**: At `~/Desktop/claude-veo/promo-pipeline/`
+- **Remotion project**: The `promo-pipeline/` directory bundled with this plugin
 
 ## Pipeline: 3 Stages
 
@@ -85,7 +85,7 @@ Determine from the user (conversationally or via YAML config):
 ### Step 2: Search Stock Footage
 
 ```bash
-python3 ~/Desktop/claude-veo/promo-pipeline/scripts/stock_search.py \
+python3 promo-pipeline/scripts/stock_search.py \
   --query "aerial city night" \
   --source pixabay \
   --orientation landscape \
@@ -95,7 +95,7 @@ python3 ~/Desktop/claude-veo/promo-pipeline/scripts/stock_search.py \
 
 For music:
 ```bash
-python3 ~/Desktop/claude-veo/promo-pipeline/scripts/stock_search.py \
+python3 promo-pipeline/scripts/stock_search.py \
   --query "upbeat corporate" \
   --source pixabay \
   --media-type music \
@@ -107,9 +107,9 @@ Present results to user with preview URLs. Let them pick.
 ### Step 3: Download + Preprocess
 
 ```bash
-python3 ~/Desktop/claude-veo/promo-pipeline/scripts/stock_download.py \
+python3 promo-pipeline/scripts/stock_download.py \
   --url "DOWNLOAD_URL" \
-  --output ~/Desktop/claude-veo/promo-pipeline/public/stock/scene-id.mp4 \
+  --output promo-pipeline/public/stock/scene-id.mp4 \
   --trim-duration 10 \
   --gpu
 ```
@@ -119,9 +119,9 @@ This scales to 1080p 30fps, pads if needed, and encodes H.264.
 ### Step 4: Analyze Contrast
 
 ```bash
-python3 ~/Desktop/claude-veo/promo-pipeline/scripts/analyze_contrast.py \
-  --input ~/Desktop/claude-veo/promo-pipeline/public/stock/scene-id.mp4 \
-  --output ~/Desktop/claude-veo/promo-pipeline/public/stock/scene-id-contrast.json
+python3 promo-pipeline/scripts/analyze_contrast.py \
+  --input promo-pipeline/public/stock/scene-id.mp4 \
+  --output promo-pipeline/public/stock/scene-id-contrast.json
 ```
 
 Produces a per-second 4x3 luminance grid. The Remotion `AdaptiveText` component
@@ -134,9 +134,9 @@ reads this to adjust text backing plates:
 
 Use the existing Gemini TTS script:
 ```bash
-python3 ~/Desktop/claude-veo/challenge-video/scripts/gemini-tts.py \
+python3 promo-pipeline/scripts/tts_generate.py \
   --text "Your voiceover text here" \
-  --output ~/Desktop/claude-veo/promo-pipeline/public/voiceover/scene-id.wav
+  --output promo-pipeline/public/voiceover/scene-id.wav
 ```
 
 ### Step 6: Build Scene Config JSON
@@ -169,7 +169,7 @@ Create `scene-config.json` with all paths and contrast data resolved:
 ### Step 7: Render
 
 ```bash
-cd ~/Desktop/claude-veo/promo-pipeline
+cd promo-pipeline
 npx remotion render PromoVideo --props scene-config.json --codec h264 --crf 18
 ```
 

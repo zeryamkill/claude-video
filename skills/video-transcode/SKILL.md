@@ -5,7 +5,10 @@ description: >
   Converts between H.264, H.265, AV1, VP9, ProRes, and DNxHR. Handles compression,
   quality optimization, two-pass encoding, container remuxing, and batch processing.
   Use when user says "convert", "transcode", "compress", "encode", "change format",
-  "h264", "h265", "hevc", "av1", "prores", "mkv to mp4", "reduce file size", or "remux".
+  "h264", "h265", "hevc", "av1", "prores", "mkv to mp4", "reduce file size", "remux",
+  "make smaller", "file too big", "shrink video", "smaller file", "video too large",
+  "reduce quality", or "change codec". Also trigger when user describes needing a video
+  in a different format or wanting to reduce file size for email, upload, or storage.
 allowed-tools:
   - Bash
   - Read
@@ -148,4 +151,8 @@ NVENC supports up to **8 concurrent encoding sessions** on consumer GPUs.
 - **Always add `-movflags +faststart`** for MP4 output (moves metadata to beginning for streaming)
 - **Use `-tag:v hvc1`** for H.265 in MP4 (required for Apple device playback)
 - **Stream copy** (`-c copy`) when only changing container — instant, lossless
-- **CRF mode** is almost always better than target bitrate — let the encoder decide
+- **CRF mode** is almost always better than target bitrate -- let the encoder decide
+
+## Reference
+
+Load `references/transcode.md` for codec comparison tables, two-pass encoding recipes, and container compatibility matrix.
